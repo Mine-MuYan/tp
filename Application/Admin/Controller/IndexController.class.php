@@ -29,4 +29,39 @@ class IndexController extends AdminController {
         }
     }
 
+    /**
+     * 二级区域管理账号
+     */
+    public function hygl(){
+        $this->display();
+    }
+
+    /**
+     * 添加二级区域管理
+     */
+    public function addqy(){
+
+        $this->display();
+    }
+
+    /**
+     * 添加二级区域管理动作
+     */
+    public function addqying(){
+        var_dump($_POST);die;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
