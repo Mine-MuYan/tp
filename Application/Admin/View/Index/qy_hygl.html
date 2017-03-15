@@ -11,38 +11,28 @@
     <thead>
         <tr>
 		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">UID</th>
-		<th class="">账号</th>
-		<th class="">登录次数</th>
-		<th class="">最后登录时间</th>
-		<th class="">最后登录IP</th>
-		<th class="">状态</th>
+		<th class="">ID</th>
+		<th class="">用户名</th>
+		<th class="">邮箱</th>
 		<th class="">操作</th>
 		</tr>
     </thead>
     <tbody>
-		<notempty name="_list">
-		<volist name="_list" id="vo">
+
+		<volist name="list_hygl" id="vo">
 		<tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+			<td>{$vo.id} </td>
 			<td>{$vo.username} </td>
-			<td>{$vo.nickname}</td>
-			<td>{$vo.login}</td>
-			<td><span>{$vo.last_login_time|time_format}</span></td>
-			<td><span>{:long2ip($vo['last_login_ip'])}</span></td>
-			<td>{$vo.status_text}</td>
-			<td><eq name="vo.status" value="1">
-				<a href="{:U('User/changeStatus?method=forbidUser&id='.$vo['uid'])}" class="ajax-get">禁用</a>
-				<else/>
-				<a href="{:U('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
-				</eq>
-				<a href="{:U('AuthManager/group?uid='.$vo['uid'])}" class="confirm ajax-get">删除</a>
-                </td>
+			<td>{$vo.email} </td>
+			<td>
+				<span>编辑</span>  |
+				<span>删除</span>
+
+			</td>
 		</tr>
 		</volist>
-		<else/>
-		<td colspan="9" class="text-center"> aOh! 暂时还没有内容! </td>
-		</notempty>
+
 	</tbody>
     </table>
 	</div>

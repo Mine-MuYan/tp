@@ -87,37 +87,53 @@
             
 	<!-- 标题栏 -->
 	<div class="main-title">
-		<h2>二级（区域）会员列表</h2>
+		<h2>模型列表</h2>
+
 	</div>
-    <!-- 数据列表 -->
-    <div class="data-table table-striped">
-	<table class="">
+    <div class="tools">
+        <a class="btn" href="<?php echo U('Model/add');?>">新 增</a>
+        <button class="btn ajax-post" target-form="ids" url="<?php echo U('Model/setStatus',array('status'=>1));?>">启 用</button>
+        <button class="btn ajax-post" target-form="ids" url="<?php echo U('Model/setStatus',array('status'=>0));?>">禁 用</button>
+        <a class="btn" href="<?php echo U('Model/generate');?>">生 成</a>
+    </div>
+
+	<!-- 数据列表 -->
+	<div class="data-table">
+        <div class="data-table table-striped">
+<table class="">
     <thead>
         <tr>
 		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">邮箱</th>
+		<th class="">编号</th>
+		<th class="">标识</th>
+		<th class="">名称</th>
+		<th class="">创建时间</th>
+		<th class="">状态</th>
 		<th class="">操作</th>
 		</tr>
     </thead>
     <tbody>
-
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
+	<?php if(!empty($_list)): if(is_array($_list)): $i = 0; $__LIST__ = $_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+            <td><input class="ids" type="checkbox" name="ids[]" value="<?php echo ($vo["id"]); ?>" /></td>
 			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
+			<td><?php echo ($vo["name"]); ?></td>
+			<td><a data-id="<?php echo ($vo["id"]); ?>" href="<?php echo U('model/edit?id='.$vo['id']);?>"><?php echo ($vo["title"]); ?></a></td>
+			<td><span><?php echo (time_format($vo["create_time"])); ?></span></td>
+			<td><?php echo ($vo["status_text"]); ?></td>
 			<td>
-				<span>编辑</span>  |
-				<span>删除</span>
-
-			</td>
+				<a href="<?php echo U('think/lists?model='.$vo['name']);?>">数据</a>
+				<a href="<?php echo U('model/setstatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']));?>" class="ajax-get"><?php echo (show_status_op($vo["status"])); ?></a>
+				<a href="<?php echo U('model/edit?id='.$vo['id']);?>">编辑</a>
+				<a href="<?php echo U('model/del?ids='.$vo['id']);?>" class="confirm ajax-get">删除</a>
+            </td>
 		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
+		<?php else: ?>
+		<td colspan="7" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
 	</tbody>
     </table>
-	</div>
+
+        </div>
+    </div>
     <div class="page">
         <?php echo ($_page); ?>
     </div>
@@ -215,32 +231,23 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
-
-	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
-	});
-    //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
-	</script>
+    <script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
+    <script type="text/javascript">
+    $(function(){
+    	$("#search").click(function(){
+    		var url = $(this).attr('url');
+    		var status = $('select[name=status]').val();
+    		var search = $('input[name=search]').val();
+    		if(status != ''){
+    			url += '/status/' + status;
+    		}
+    		if(search != ''){
+    			url += '/search/' + search;
+    		}
+    		window.location.href = url;
+    	});
+})
+</script>
 
 </body>
 </html>

@@ -85,42 +85,26 @@
             
 
             
-	<!-- 标题栏 -->
 	<div class="main-title">
-		<h2>二级（区域）会员列表</h2>
+		<h2>分类管理</h2>
 	</div>
-    <!-- 数据列表 -->
-    <div class="data-table table-striped">
-	<table class="">
-    <thead>
-        <tr>
-		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">邮箱</th>
-		<th class="">操作</th>
-		</tr>
-    </thead>
-    <tbody>
 
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
-			<td>
-				<span>编辑</span>  |
-				<span>删除</span>
-
-			</td>
-		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
-	</tbody>
-    </table>
+	<!-- 表格列表 -->
+	<div class="tb-unit posr">
+		<div class="tb-unit-bar">
+			<a class="btn" href="<?php echo U('add');?>">新 增</a>
+		</div>
+		<div class="category">
+			<div class="hd cf">
+				<div class="fold">折叠</div>
+				<div class="order">排序</div>
+				<div class="order">发布</div>
+				<div class="name">名称</div>
+			</div>
+			<?php echo R('Category/tree', array($tree));?>
+		</div>
 	</div>
-    <div class="page">
-        <?php echo ($_page); ?>
-    </div>
+	<!-- /表格列表 -->
 
         </div>
         <div class="cont-ft">
@@ -215,31 +199,58 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
-
 	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
-	});
-    //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
+		(function($){
+			/* 分类展开收起 */
+			$(".category dd").prev().find(".fold i").addClass("icon-unfold")
+				.click(function(){
+					var self = $(this);
+					if(self.hasClass("icon-unfold")){
+						self.closest("dt").next().slideUp("fast", function(){
+							self.removeClass("icon-unfold").addClass("icon-fold");
+						});
+					} else {
+						self.closest("dt").next().slideDown("fast", function(){
+							self.removeClass("icon-fold").addClass("icon-unfold");
+						});
+					}
+				});
+
+			/* 三级分类删除新增按钮 */
+			$(".category dd dd .add-sub").remove();
+
+			/* 实时更新分类信息 */
+			$(".category")
+				.on("submit", "form", function(){
+					var self = $(this);
+					$.post(
+						self.attr("action"),
+						self.serialize(),
+						function(data){
+							/* 提示信息 */
+							var name = data.status ? "success" : "error", msg;
+							msg = self.find(".msg").addClass(name).text(data.info)
+									  .css("display", "inline-block");
+							setTimeout(function(){
+								msg.fadeOut(function(){
+									msg.text("").removeClass(name);
+								});
+							}, 1000);
+						},
+						"json"
+					);
+					return false;
+				})
+                .on("focus","input",function(){
+                    $(this).data('param',$(this).closest("form").serialize());
+
+                })
+                .on("blur", "input", function(){
+                    if($(this).data('param')!=$(this).closest("form").serialize()){
+                        $(this).closest("form").submit();
+                    }
+                });
+		})(jQuery);
 	</script>
 
 </body>

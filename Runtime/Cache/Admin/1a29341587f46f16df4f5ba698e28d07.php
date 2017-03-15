@@ -85,42 +85,48 @@
             
 
             
-	<!-- 标题栏 -->
 	<div class="main-title">
-		<h2>二级（区域）会员列表</h2>
+		<h2>导航管理</h2>
 	</div>
-    <!-- 数据列表 -->
-    <div class="data-table table-striped">
-	<table class="">
-    <thead>
-        <tr>
-		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">邮箱</th>
-		<th class="">操作</th>
-		</tr>
-    </thead>
-    <tbody>
 
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
-			<td>
-				<span>编辑</span>  |
-				<span>删除</span>
-
-			</td>
-		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
-	</tbody>
-    </table>
+	<div class="cf">
+		<a class="btn" href="<?php echo U('add','pid='.$pid);?>">新 增</a>
+		<a class="btn" href="javascript:;">删 除</a>
+		<button class="btn list_sort" url="<?php echo U('sort',array('pid'=>I('get.pid',0)),'');?>">排序</button>
 	</div>
-    <div class="page">
-        <?php echo ($_page); ?>
-    </div>
+
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th class="row-selected">
+						<input class="checkbox check-all" type="checkbox">
+					</th>
+					<th>ID</th>
+					<th>导航名称</th>
+					<th>导航地址</th>
+                    <th>排序</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if(!empty($list)): if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$channel): $mod = ($i % 2 );++$i;?><tr>
+						<td><input class="ids row-selected" type="checkbox" name="" id="" value="<?php echo ($channel['id']); ?>"> </td>
+						<td><?php echo ($channel["id"]); ?></td>
+						<td><a href="<?php echo U('index?pid='.$channel['id']);?>"><?php echo ($channel["title"]); ?></a></td>
+						<td><?php echo ($channel["url"]); ?></td>
+                        <td><?php echo ($channel["sort"]); ?></td>
+						<td>
+							<a title="编辑" href="<?php echo U('edit?id='.$channel['id'].'&pid='.$pid);?>">编辑</a>
+							<a href="<?php echo U('setStatus?ids='.$channel['id'].'&status='.abs(1-$channel['status']));?>" class="ajax-get"><?php echo (show_status_op($channel["status"])); ?></a>
+							<a class="confirm ajax-get" title="删除" href="<?php echo U('del?id='.$channel['id']);?>">删除</a>
+						</td>
+					</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+				<?php else: ?>
+				<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
+			</tbody>
+		</table>
+	</div>
 
         </div>
         <div class="cont-ft">
@@ -215,32 +221,27 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
+<script type="text/javascript">
+    $(function() {
+    	//点击排序
+    	$('.list_sort').click(function(){
+    		var url = $(this).attr('url');
+    		var ids = $('.ids:checked');
+    		var param = '';
+    		if(ids.length > 0){
+    			var str = new Array();
+    			ids.each(function(){
+    				str.push($(this).val());
+    			});
+    			param = str.join(',');
+    		}
 
-	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
-	});
-    //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
-	</script>
+    		if(url != undefined && url != ''){
+    			window.location.href = url + '/ids/' + param;
+    		}
+    	});
+    });
+</script>
 
 </body>
 </html>

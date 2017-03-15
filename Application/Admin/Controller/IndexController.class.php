@@ -32,7 +32,13 @@ class IndexController extends AdminController {
     /**
      * 显示二级区域管理账号
      */
-    public function hygl(){
+    public function qy_hygl(){
+
+        $db_ucenter_member = M('ucenter_member');
+        $where_ucenter_memeber['dj'] = 1;
+        $list_hygl =$db_ucenter_member ->where($where_ucenter_memeber) -> select();
+        $this->assign('list_hygl',$list_hygl);
+       // p($list_hygl);die;
         $this->display();
     }
 
@@ -105,8 +111,8 @@ class IndexController extends AdminController {
     public function addyg(){
         $db_ucenter_member = M('ucenter_member');
         $where_ucenter_member['dj']=2 ;
-        $list_qy=$db_ucenter_member -> where($where_ucenter_member) -> select();
-        $this->assign('list_qy',$list_qy);
+        $list_yyb=$db_ucenter_member -> where($where_ucenter_member) -> select();
+        $this->assign('list_yyb',$list_yyb);
         $this->display();
     }
 
@@ -116,11 +122,11 @@ class IndexController extends AdminController {
     public function addyging(){
         $data_ucenter_member['username'] = I('username');
         $data_ucenter_member['password'] = md5(sha1(I['password']).'S}->&A]GTOa^Q:dgUqCHn;+38PMz,`ursk)L(~6f');
-        $data_ucenter_member['status'] = '1';
+        $data_ucenter_member['status'] = 1;
         $data_ucenter_member['email'] = I('email');
         $data_ucenter_member['reg_time'] = time();
-        $data_ucenter_member['dj'] = '3';
-        $data_ucenter_member['qy'] = I('qy');
+        $data_ucenter_member['dj'] = 3;
+        $data_ucenter_member['qy'] = I('yyb');
         $db_ucenter_member = M('ucenter_member');
         $where_ucenter_member['username']=I('username');
         $res=$db_ucenter_member->where($where_ucenter_member)->select();
@@ -131,8 +137,6 @@ class IndexController extends AdminController {
             $this->success('四级员工添加成功', 'Admin/Index/addyg');
         }
     }
-
-
 
 
 

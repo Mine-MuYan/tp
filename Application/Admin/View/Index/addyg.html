@@ -4,7 +4,7 @@
     <div class="main-title">
         <h2>添加四级(员工)管理</h2>
     </div>
-    <form action="{:U('Index/addyybing')}" method="post" id="form1" class="form-horizontal">
+    <form action="{:U('Index/addyging')}" method="post" id="form1" class="form-horizontal">
         <div class="form-item">
             <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
             <div class="controls">
@@ -20,8 +20,8 @@
         <div class="form-item">
             <label class="item-label">三级账号<span class="check-tips">（请下拉选择）</span></label>
             <div class="controls">
-                <select name="qy">
-                    <volist name="list_qy" id="vo">
+                <select name="yyb">
+                    <volist name="list_yyb" id="vo">
                         <option value="{$vo.username}">{$vo.username} </option>
                     </volist>
                 </select>

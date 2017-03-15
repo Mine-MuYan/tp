@@ -88,7 +88,7 @@
     <div class="main-title">
         <h2>添加四级(员工)管理</h2>
     </div>
-    <form action="<?php echo U('Index/addyybing');?>" method="post" id="form1" class="form-horizontal">
+    <form action="<?php echo U('Index/addyging');?>" method="post" id="form1" class="form-horizontal">
         <div class="form-item">
             <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
             <div class="controls">
@@ -104,8 +104,8 @@
         <div class="form-item">
             <label class="item-label">三级账号<span class="check-tips">（请下拉选择）</span></label>
             <div class="controls">
-                <select name="qy">
-                    <?php if(is_array($list_qy)): $i = 0; $__LIST__ = $list_qy;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["username"]); ?>"><?php echo ($vo["username"]); ?> </option><?php endforeach; endif; else: echo "" ;endif; ?>
+                <select name="yyb">
+                    <?php if(is_array($list_yyb)): $i = 0; $__LIST__ = $list_yyb;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["username"]); ?>"><?php echo ($vo["username"]); ?> </option><?php endforeach; endif; else: echo "" ;endif; ?>
                 </select>
 
             </div>
