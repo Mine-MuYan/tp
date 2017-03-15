@@ -950,3 +950,13 @@ function get_stemma($pids,Model &$model, $field='id'){
     }
     return $collection;
 }
+
+/**
+ * print_r()函数简化
+ */
+function p($str){
+    echo '<pre>';
+    print_r($str);
+    echo '</pre>';
+
+}

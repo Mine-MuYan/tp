@@ -2,9 +2,9 @@
 
 <block name="body">
     <div class="main-title">
-        <h2>新增二级（区域）管理账号</h2>
+        <h2>添加三级（营业部）管理</h2>
     </div>
-    <form action="{:U('Index/addqying')}" method="post" id="form1" class="form-horizontal">
+    <form action="{:U('Index/addyybing')}" method="post" id="form1" class="form-horizontal">
         <div class="form-item">
             <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
             <div class="controls">
@@ -15,6 +15,17 @@
             <label class="item-label">邮箱<span class="check-tips">（请输入邮箱）</span></label>
             <div class="controls">
                 <input type="email" class="text input-large" name="email" value="" id="email">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">二级账号<span class="check-tips">（请下拉选择）</span></label>
+            <div class="controls">
+                <select name="qy">
+                    <volist name="list_qy" id="vo">
+                        <option value="{$vo.username}"> {$vo.username} </option>
+                    </volist>
+                </select>
+
             </div>
         </div>
         <div class="form-item">
@@ -47,8 +58,10 @@
             if(username ==''){
                 alert('账号不能为空！');
                 return false;
-            }else if(email == ''){
+            }
+           else if(email == ''){
                 alert('邮箱不能为空！');
+                return false;
             }
             else if(password ==''){
                 alert('密码不能为空！');
