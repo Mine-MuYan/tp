@@ -96,18 +96,11 @@
             </div>
         </div>
         <div class="form-item">
-            <label class="item-label">邮箱<span class="check-tips">（请输入邮箱）</span></label>
-            <div class="controls">
-                <input type="email" class="text input-large" name="email" value="" id="email">
-            </div>
-        </div>
-        <div class="form-item">
             <label class="item-label">二级账号<span class="check-tips">（请下拉选择）</span></label>
             <div class="controls">
                 <select name="qy">
                     <?php if(is_array($list_qy)): $i = 0; $__LIST__ = $list_qy;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["username"]); ?>"> <?php echo ($vo["username"]); ?> </option><?php endforeach; endif; else: echo "" ;endif; ?>
                 </select>
-
             </div>
         </div>
         <div class="form-item">
@@ -230,10 +223,6 @@
             var repassword= $('#repassword').val();
             if(username ==''){
                 alert('账号不能为空！');
-                return false;
-            }
-           else if(email == ''){
-                alert('邮箱不能为空！');
                 return false;
             }
             else if(password ==''){

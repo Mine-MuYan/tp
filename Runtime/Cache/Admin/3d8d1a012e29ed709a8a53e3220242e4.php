@@ -85,43 +85,44 @@
             
 
             
-    <div class="main-title">
-        <h2>添加四级(员工)管理</h2>
-    </div>
-    <form action="<?php echo U('Index/addyging');?>" method="post" id="form1" class="form-horizontal">
-        <div class="form-item">
-            <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
-            <div class="controls">
-                <input type="text" class="text input-large" name="username" value="" id="username">
-            </div>
-        </div>
-        <div class="form-item">
-            <label class="item-label">三级账号<span class="check-tips">（请下拉选择）</span></label>
-            <div class="controls">
-                <select name="yyb">
-                    <?php if(is_array($list_yyb)): $i = 0; $__LIST__ = $list_yyb;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["username"]); ?>"><?php echo ($vo["username"]); ?> </option><?php endforeach; endif; else: echo "" ;endif; ?>
-                </select>
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>二级（区域）会员列表</h2>
+	</div>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">ID</th>
+		<th class="">用户名</th>
+		<th class="">所属三级（营业部）</th>
+		<th class="">邮箱</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
 
-            </div>
-        </div>
-        <div class="form-item">
-            <label class="item-label">密码<span class="check-tips">（请输入用户密码）</span></label>
-            <div class="controls">
-                <input type="password" class="text input-large" name="password" value="" id="password">
-            </div>
-        </div>
-        <div class="form-item">
-            <label class="item-label">确认密码<span class="check-tips">（请重新输入密码）</span></label>
-            <div class="controls">
-                <input type="password" class="text input-large" name="repassword" value="" id="repassword">
-            </div>
-        </div>
-        <div class="form-item">
-            <!--<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>-->
-            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确 定</button>
-            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
-        </div>
-    </form>
+		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
+			<td><?php echo ($vo["id"]); ?> </td>
+			<td><?php echo ($vo["username"]); ?> </td>
+			<td><?php echo ($vo["yyb"]); ?> </td>
+			<td><?php echo ($vo["email"]); ?> </td>
+			<td>
+				<a href="<?php echo U('yg_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
+				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
+
+			</td>
+		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+
+	</tbody>
+    </table>
+	</div>
+    <div class="page">
+        <?php echo ($_page); ?>
+    </div>
 
         </div>
         <div class="cont-ft">
@@ -216,32 +217,32 @@
         }();
     </script>
     
-    <script type="text/javascript">
-        $("#submit").click(function(){
-            var username= $('#username').val();
-            var email= $('#email').val();
-            var password= $('#password').val();
-            var repassword= $('#repassword').val();
-            if(username ==''){
-                alert('账号不能为空！');
-                return false;
-            }
-            else if(password ==''){
-                alert('密码不能为空！');
-                return false;
-            }else if(repassword == ''){
-                alert('确定密码不能为空！');
-                return false;
-            } else if(password!=repassword){
-                alert('两次输入的密码不同！');
-                return false;
-            }else{
-                $("#form1").submit();
-            }
-        })
-        //导航高亮
-        highlight_subnav('<?php echo U('User/index');?>');
-    </script>
+	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    highlight_subnav('<?php echo U('User/hygl');?>');
+	</script>
 
 </body>
 </html>

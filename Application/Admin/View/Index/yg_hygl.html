@@ -13,7 +13,7 @@
 		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 		<th class="">ID</th>
 		<th class="">用户名</th>
-		<th class="">所属二级（区域）</th>
+		<th class="">所属三级（营业部）</th>
 		<th class="">邮箱</th>
 		<th class="">操作</th>
 		</tr>
@@ -25,10 +25,10 @@
             <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
 			<td>{$vo.id} </td>
 			<td>{$vo.username} </td>
-			<td>{$vo.qy} </td>
+			<td>{$vo.yyb} </td>
 			<td>{$vo.email} </td>
 			<td>
-				<a href="{:U('yyb_edit',array('id'=>$vo['id']))}"><span>编辑</span></a>  |
+				<a href="{:U('yg_edit',array('id'=>$vo['id']))}"><span>编辑</span></a>  |
 				<a href="{:U('hy_del',array('id'=>$vo['id']))}"><span>删除</span></a>
 
 			</td>

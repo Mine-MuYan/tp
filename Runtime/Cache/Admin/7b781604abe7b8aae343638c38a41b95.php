@@ -97,6 +97,7 @@
 		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
 		<th class="">ID</th>
 		<th class="">用户名</th>
+		<th class="">所属二级（区域）</th>
 		<th class="">邮箱</th>
 		<th class="">操作</th>
 		</tr>
@@ -107,10 +108,11 @@
             <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
 			<td><?php echo ($vo["id"]); ?> </td>
 			<td><?php echo ($vo["username"]); ?> </td>
+			<td><?php echo ($vo["qy"]); ?> </td>
 			<td><?php echo ($vo["email"]); ?> </td>
 			<td>
-				<span>编辑</span>  |
-				<span>删除</span>
+				<a href="<?php echo U('yyb_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
+				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
 
 			</td>
 		</tr><?php endforeach; endif; else: echo "" ;endif; ?>

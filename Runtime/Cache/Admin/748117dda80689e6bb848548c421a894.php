@@ -86,20 +86,22 @@
 
             
     <div class="main-title">
-        <h2>添加四级(员工)管理</h2>
+        <h2>管理四级(员工)管理</h2>
     </div>
-    <form action="<?php echo U('Index/addyging');?>" method="post" id="form1" class="form-horizontal">
+    <form action="<?php echo U('Index/yg_editing');?>" method="post" id="form1" class="form-horizontal">
         <div class="form-item">
-            <label class="item-label">用户名<span class="check-tips">（用户名会作为默认的昵称）</span></label>
+            <input type="hidden" value="<?php echo ($yg_edit["id"]); ?>" name="id" >
+            <label class="item-label">用户名<span class="check-tips">（用户名作为登录名，不能修改！）</span></label>
             <div class="controls">
-                <input type="text" class="text input-large" name="username" value="" id="username">
+                <input type="text" class="text input-large" name="username" value="<?php echo ($yg_edit["username"]); ?>" id="username" readonly style="cursor:not-allowed">
             </div>
         </div>
         <div class="form-item">
             <label class="item-label">三级账号<span class="check-tips">（请下拉选择）</span></label>
             <div class="controls">
-                <select name="yyb">
-                    <?php if(is_array($list_yyb)): $i = 0; $__LIST__ = $list_yyb;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["username"]); ?>"><?php echo ($vo["username"]); ?> </option><?php endforeach; endif; else: echo "" ;endif; ?>
+                <select name="yg_edit_2">
+                    <option value="<?php echo ($yg_edit["yyb"]); ?>"> <?php echo ($yg_edit["yyb"]); ?> </option>
+                    <?php if(is_array($yg_edit_2)): $i = 0; $__LIST__ = $yg_edit_2;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["username"]); ?>"><?php echo ($vo["username"]); ?> </option><?php endforeach; endif; else: echo "" ;endif; ?>
                 </select>
 
             </div>

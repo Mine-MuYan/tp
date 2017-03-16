@@ -109,9 +109,8 @@
 			<td><?php echo ($vo["username"]); ?> </td>
 			<td><?php echo ($vo["email"]); ?> </td>
 			<td>
-				<span>编辑</span>  |
-				<span>删除</span>
-
+				<a href="<?php echo U('qy_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
+				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
 			</td>
 		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
