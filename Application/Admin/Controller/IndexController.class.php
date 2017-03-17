@@ -272,7 +272,10 @@ class IndexController extends AdminController {
         $this->success('四级员工修改成功', 'Admin/Index/yg_hygl');
     }
 
-    public function qy_users(){
+    /**
+     * 客户信息展示表
+     */
+    public function users(){
         $db_user = M('user');
         if(UID==1){
             $where = null;
@@ -302,19 +305,35 @@ class IndexController extends AdminController {
                 }
                 $where['staff']=array('in',$array_nul);
             }
-
         }
         $count      = $db_user->where($where)->count();
         $Page       = new \Think\Page($count,10);
         $show       = $Page->show();
-        $qy_user = $db_user-> order('user_id') ->where($where)-> limit($Page->firstRow.','.$Page->listRows) -> select();
-        $this->assign('qy_user',$qy_user);
+        $user = $db_user-> order('user_id') ->where($where)-> limit($Page->firstRow.','.$Page->listRows) -> select();
+        $this->assign('user',$user);
         $this->assign('_page',$show);
-        $this->display('Users/qy_users');
+        $this->display('Users/users');
     }
 
+    /**
+     * 客户投资记录表
+     */
+    public function users_invest(){
+        $db_invest = M('invest');
+        $where_user['user_id'] = I('user_id');
+        $count      = $db_invest->where($where_user)->count();
+        $Page       = new \Think\Page($count,10);
+        $show       = $Page->show();
+        $users_invest = $db_invest-> order('user_id') -> where($where_user) -> limit($Page->firstRow.','.$Page->listRows) -> select();
+        $this->assign('users_invest',$users_invest);
+        $this->assign('_page',$show);
+        $this->display('Users/users_invest');
+    }
 
-
+    /**
+     * 客户投资汇总
+     */
+    public function a(){}
 
 
 
