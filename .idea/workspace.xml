@@ -1,227 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecaed4b9-f5ed-4d71-a96d-41485d699d39" name="默认的" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Common/function.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Conf/config.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/ActionController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/AddonsController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/AdminController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/ArticleController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/AttributeController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/AuthManagerController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/CategoryController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/ChannelController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/ConfigController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/DatabaseController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/FileController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/MenuController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/ModelController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/QiniuController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/ThinkController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Controller/UserController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Logic/ArticleLogic.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Logic/BaseLogic.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Logic/DownloadLogic.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/ActionModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/AddonsModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/AttributeModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/AuthGroupModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/AuthRuleModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/CategoryModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/ChannelModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/ConfigModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/DocumentModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/FileModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/HooksModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/MemberModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/MenuModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/ModelModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/PictureModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/Model/UrlModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Action/actionlog.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Action/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Addons/adminlist.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Addons/config.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Addons/create.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Addons/edithook.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Addons/hooks.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Addons/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/add.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/batchoperate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/draftbox.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/examine.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/mydocument.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/recycle.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/reply.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/sidemenu.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Article/sort.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Attribute/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Attribute/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/AuthManager/category.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/AuthManager/editgroup.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/AuthManager/group.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/AuthManager/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/AuthManager/managergroup.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/AuthManager/tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/AuthManager/user.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Category/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Category/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Category/operate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Category/tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Channel/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Channel/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Channel/sort.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Config/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Config/group.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Config/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Config/sort.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Database/export.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Database/import.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Index/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Menu/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Menu/import.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Menu/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Menu/sort.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Model/add.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Model/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Model/generate.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Model/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Public/base.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Public/error.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Public/exception.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Public/login.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Public/success.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Qiniu/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Think/add.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Think/edit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/Think/lists.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/User/action.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/User/add.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/User/editaction.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/User/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/User/updatenickname.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Admin/View/User/updatepassword.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Api/CategoryApi.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Api/ConfigApi.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Api/DocumentApi.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Api/ModelApi.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Api/SystemApi.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Api/UserApi.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Behavior/InitHookBehavior.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Conf/config.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Conf/tags.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Controller/Addon.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Common/Model/TreeModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Common/function.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Conf/config.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Controller/AddonsController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Controller/ArticleController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Controller/EmptyController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Controller/FileController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Controller/HomeController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Controller/UserController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Logic/ArticleLogic.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Logic/BaseLogic.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Logic/DownloadLogic.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Model/CategoryModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Model/ChannelModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Model/DocumentModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Model/FileModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Model/MemberModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Article/article/detail.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Article/download/detail.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Article/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Article/lists.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Base/common.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Category/lists.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Index/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Public/body.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Public/footer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Public/head.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Public/header.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/Public/var.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/User/login.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/User/profile.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/View/default/User/register.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Home/Widget/CategoryWidget.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Common/function.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Conf/config.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Controller/IndexController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Controller/InstallController.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Data/conf.tpl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Data/install.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Data/install.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/Data/user.tpl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/View/Index/complete.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/View/Index/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/View/Install/step1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/View/Install/step2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/View/Install/step3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/Install/View/Public/base.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Api/Api.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Api/UserApi.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Common/common.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Conf/README.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Conf/config.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Model/UcenterMemberModel.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Service/Service.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Application/User/Service/UserService.class.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/01b9666b2ed3b20a65495dff2ba42a52.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/0d8076fccdfd3b5b020f0b08f5754238.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/0e570eb4d82317bfe00583e8398288ce.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/13e4608479ae3d755f7482901d8b5d74.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/1a29341587f46f16df4f5ba698e28d07.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/2009ce4a4591ad19688854c3df454ef3.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/2cc6458f1c28da0b05544317b45a9ee9.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/30b0000e037f4dc0a3e112ded1ca8844.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/396cddbc31ed224ac2a214629d80d37d.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/3c5566b2bfbf6ef00ac5366ba47246fe.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/3d8d1a012e29ed709a8a53e3220242e4.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/46d40ddc8445725ea624943712142302.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/62c9d7a522bd79c224f73a09e7c08993.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/65a5c81e2e43da849a7b345f7d20293b.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/65e605872ed5d34210f5b33beb13f5a3.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/70619b898e29e62c68b1d45593e161aa.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/748117dda80689e6bb848548c421a894.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/79bde46336f7088c2c4092b8642fe931.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/7a43802348718cf23c9cdb4e08a828c3.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/7b5982410f6b6b562e3d87ba94cd1a59.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/7b781604abe7b8aae343638c38a41b95.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/99151667a4ee2f27257c5918df94d72a.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/9bb5e7ead1bbec7c3d970a481af28a6e.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/9bfef0f9f473c596f668b6c9a32bfd5c.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/a2687d4c008de26902ac38bda01195da.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/a77aa83c121d51b6cd699ea2b65451f6.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/b2958c8c8e586a48faa6c68ada732ac5.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/b595b808c2ebeeeb0478ffc30bb4e87a.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/b6dcff0ced34de0b622ade640eddd3d5.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/b956215329b6f9aca22277599a4efdfc.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/c2cc8605870506ffc9a2d62e5cb59782.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/c704f6bde57ca6e2e2c1bca7f0598b35.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/c871bba49b6ba63f385a8967a426d0b0.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/da897c422467e2f96d9880b69840524e.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/e26bb75ad84845820b689817faa69820.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/e915606f4666252950bacf14eab57f78.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/fafa0b7e37b3582a30118a03486b03e6.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Admin/fea6ecfa909155b3a58e2631a09f55e1.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Home/769e70f2e46f34ceb60619bbda5e4691.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Home/79d6c86ea304e276e09507d52c8f4d52.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Home/9a9e4227b3c0b552fe0f4e7e528d8737.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Cache/Home/b171d71961885d3bf0f7a9b2e0867b01.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Logs/1489650244-17_03_16.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Logs/17_03_15.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Logs/17_03_16.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Logs/17_03_17.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Temp/2bb202459c30a1628513f40ab22fa01a.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Temp/4e819c837d54a6ed09abc77a8560a66f.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Temp/865e8245bc0c525aa4a48bfb433d7c3e.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Temp/95a1fe934b68ebfee8468bf0bc4f0000.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Runtime/Temp/cbc58bd3cdec352c980d0ad729b5c219.php" afterPath="" />
-    </list>
+    <list default="true" id="ecaed4b9-f5ed-4d71-a96d-41485d699d39" name="默认的" comment="" />
     <ignored path="channeladmin.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -242,11 +22,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/IndexController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3593023">
-              <caret line="321" column="33" selection-start-line="321" selection-start-column="33" selection-end-line="321" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.32142857">
+              <caret line="271" column="22" selection-start-line="271" selection-start-column="15" selection-end-line="271" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47916666">
+              <caret line="87" column="11" selection-start-line="87" selection-start-column="11" selection-end-line="87" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -255,8 +45,8 @@
       <file leaf-file-name="biji.php" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Desktop/biji.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3571428">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.32142857">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="8" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -285,6 +75,7 @@
         <option value="$PROJECT_DIR$/cs/index.php" />
         <option value="$USER_HOME$/Desktop/biji.php" />
         <option value="$PROJECT_DIR$/Application/Admin/Controller/IndexController.class.php" />
+        <option value="$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php" />
       </list>
     </option>
   </component>
@@ -363,6 +154,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="channeladmin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="channeladmin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -480,10 +311,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="版本控制" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -657,16 +488,24 @@
     </entry>
     <entry file="file://$USER_HOME$/Desktop/biji.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3571428">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.32142857">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="8" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Admin/Controller/IndexController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3593023">
-          <caret line="321" column="33" selection-start-line="321" selection-start-column="33" selection-end-line="321" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.32142857">
+          <caret line="271" column="22" selection-start-line="271" selection-start-column="15" selection-end-line="271" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47916666">
+          <caret line="87" column="11" selection-start-line="87" selection-start-column="11" selection-end-line="87" selection-end-column="11" />
           <folding />
         </state>
       </provider>

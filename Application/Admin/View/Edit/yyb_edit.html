@@ -1,0 +1,73 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>修改三级（营业部）管理</h2>
+    </div>
+    <form action="{:U('Index/yyb_editing')}" method="post" id="form1" class="form-horizontal">
+        <div class="form-item">
+            <input type="hidden" value="{$yyb_edit.id}" name="id" >
+            <label class="item-label">用户名<span class="check-tips">（用户名作为登录名，不能修改！）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="username" value="{$yyb_edit.username}" id="username" readonly style="cursor:not-allowed">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">二级账号<span class="check-tips">（请下拉选择）</span></label>
+            <div class="controls">
+                <select name="yyb_edit_2">
+                    <option value="{$yyb_edit.qy}"> {$yyb_edit.qy} </option>
+                    <volist name="yyb_edit_2" id="vo">
+                        <option value="{$vo.username}"> {$vo.username} </option>
+                    </volist>
+                </select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">密码<span class="check-tips">（请输入用户密码）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="password" value="" id="password">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">确认密码<span class="check-tips">（请重新输入密码）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="repassword" value="" id="repassword">
+            </div>
+        </div>
+        <div class="form-item">
+            <!--<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>-->
+            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        $("#submit").click(function(){
+            var username= $('#username').val();
+            var email= $('#email').val();
+            var password= $('#password').val();
+            var repassword= $('#repassword').val();
+            if(username ==''){
+                alert('账号不能为空！');
+                return false;
+            }
+            else if(password ==''){
+                alert('密码不能为空！');
+                return false;
+            }else if(repassword == ''){
+                alert('确定密码不能为空！');
+                return false;
+            } else if(password!=repassword){
+                alert('两次输入的密码不同！');
+                return false;
+            }else{
+                $("#form1").submit();
+            }
+        })
+        //导航高亮
+        highlight_subnav('{:U('User/index')}');
+    </script>
+</block>
