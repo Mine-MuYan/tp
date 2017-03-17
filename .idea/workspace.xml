@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecaed4b9-f5ed-4d71-a96d-41485d699d39" name="默认的" comment="修改git忽略文件">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/channeladmin/.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="ecaed4b9-f5ed-4d71-a96d-41485d699d39" name="默认的" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php" afterPath="$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Runtime/Logs/17_03_17.log" afterPath="$PROJECT_DIR$/Runtime/Logs/17_03_17.log" />
@@ -43,8 +41,8 @@
       <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8611111">
-              <caret line="120" column="4" selection-start-line="120" selection-start-column="4" selection-end-line="120" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.8784722">
+              <caret line="121" column="5" selection-start-line="106" selection-start-column="4" selection-end-line="121" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -325,7 +323,13 @@
       <option name="project" value="LOCAL" />
       <updated>1489733605465</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="redis">
+      <created>1489735616244</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1489735616244</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -367,7 +371,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修改git忽略文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改git忽略文件" />
+    <MESSAGE value="redis" />
+    <option name="LAST_COMMIT_MESSAGE" value="redis" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -537,8 +542,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8611111">
-          <caret line="120" column="4" selection-start-line="120" selection-start-column="4" selection-end-line="120" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.8784722">
+          <caret line="121" column="5" selection-start-line="106" selection-start-column="4" selection-end-line="121" selection-end-column="5" />
           <folding />
         </state>
       </provider>

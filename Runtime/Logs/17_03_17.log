@@ -2026,3 +2026,12 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTrace [ RunTime:0.000000s ]
 INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
 
+[ 2017-03-17T15:35:43+08:00 ] 127.0.0.1 /index.php?s=/Home/Index/saveye.html
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.002000s ]
+
+[ 2017-03-17T15:36:22+08:00 ] 127.0.0.1 /index.php?s=/Home/Index/saveye.html
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.002000s ]
+
+[ 2017-03-17T15:36:50+08:00 ] 127.0.0.1 /index.php?s=/Home/Index/saveye.html
+SQL: SHOW COLUMNS FROM `tp_user` [ RunTime:0.001001s ]
+

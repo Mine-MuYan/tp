@@ -107,7 +107,10 @@ class IndexController extends HomeController {
     //余额数据对整
     public function saveye(){
         $db_invest=M('user');
-        $list='';
+        $html = file_get_contents('http://testwww.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=getUserAccout');
+        vendor('DES3.DES3');
+        $DES3 = new \DES3();
+        $one=$DES3->decrypt($html);
         $list=json_decode($one,true);
         $zs=count($list);
         for($i=0;$i< $zs;$i++){
@@ -118,6 +121,6 @@ class IndexController extends HomeController {
         echo 'success';
     }
 
-    
+
 
 }
