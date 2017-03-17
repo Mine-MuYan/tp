@@ -87,7 +87,7 @@
             
     <!-- 标题栏 -->
     <div class="main-title">
-        <h2>二级（区域）管理员的客户列表</h2>
+        <h2>客户列表</h2>
     </div>
     <!-- 数据列表 -->
     <div class="data-table table-striped">
@@ -102,19 +102,23 @@
                 <th class="">身份证</th>
                 <th class="">账户余额</th>
                 <th class="">注册时间</th>
-                <th class="">投资记录</th>
-                <th class="">投资时间</th>
-                <th class="">到期时间</th>
+                <th class="">邀请人</th>
+                <th class="">操作</th>
             </tr>
             </thead>
             <tbody>
 
-            <?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+            <?php if(is_array($user)): $i = 0; $__LIST__ = $user;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
                     <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-                    <td><?php echo ($vo["id"]); ?> </td>
+                    <td><?php echo ($vo["user_id"]); ?> </td>
                     <td><?php echo ($vo["username"]); ?> </td>
-                    <td><?php echo ($vo["email"]); ?> </td>
-
+                    <td><?php echo ($vo["realname"]); ?> </td>
+                    <td><?php echo ($vo["phone"]); ?> </td>
+                    <td><?php echo ($vo["card_id"]); ?> </td>
+                    <td><?php echo ($vo["accout"]); ?> </td>
+                    <td><?php echo (date('Y-m-d H:i:s',$vo["reg_time"])); ?></td>
+                    <td><?php echo ($vo["staff"]); ?> </td>
+                    <td><a href="<?php echo U('users_invest',array('user_id'=>$vo['user_id']));?>">查看投资记录</a></td>
                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
             </tbody>

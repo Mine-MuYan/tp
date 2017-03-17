@@ -85,79 +85,53 @@
             
 
             
+    <!-- 标题栏 -->
     <div class="main-title">
-        <h2><?php if(isset($data)): ?>[ <?php echo ($data["title"]); ?> ] 子<?php endif; ?>菜单管理 </h2>
+        <h2>数据备份</h2>
     </div>
+    <!-- /标题栏 -->
 
     <div class="cf">
-        <a class="btn" href="<?php echo U('add',array('pid'=>I('get.pid',0)));?>">新 增</a>
-        <button class="btn ajax-post confirm" url="<?php echo U('del');?>" target-form="ids">删 除</button>
-        <a class="btn" href="<?php echo U('import',array('pid'=>I('get.pid',0)));?>">导 入</a>
-        <button class="btn list_sort" url="<?php echo U('sort',array('pid'=>I('get.pid',0)),'');?>">排序</button>
-        <!-- 高级搜索 -->
-        <div class="search-form fr cf">
-            <div class="sleft">
-                <input type="text" name="title" class="search-input" value="<?php echo I('title');?>" placeholder="请输入菜单名称">
-                <a class="sch-btn" href="javascript:;" id="search" url="/index.php?s=/Admin/Menu/index/pid/129.html"><i class="btn-search"></i></a>
-            </div>
-        </div>
+        <a id="export" class="btn" href="javascript:;" autocomplete="off">立即备份</a>
+        <a id="optimize" class="btn" href="<?php echo U('optimize');?>">优化表</a>
+        <a id="repair" class="btn" href="<?php echo U('repair');?>">修复表</a>
     </div>
 
+    <!-- 应用列表 -->
     <div class="data-table table-striped">
-        <form class="ids">
+        <form id="export-form" method="post" action="<?php echo U('export');?>">
             <table>
                 <thead>
                     <tr>
-                        <th class="row-selected">
-                            <input class="checkbox check-all" type="checkbox">
-                        </th>
-                        <th>ID</th>
-                        <th>名称</th>
-                        <th>上级菜单</th>
-                        <th>分组</th>
-                        <th>URL</th>
-                        <th>排序</th>
-                        <th>仅开发者模式显示</th>
-                        <th>隐藏</th>
-                        <th>操作</th>
+                        <th width="48"><input class="check-all" checked="chedked" type="checkbox" value=""></th>
+                        <th>表名</th>
+                        <th width="120">数据量</th>
+                        <th width="120">数据大小</th>
+                        <th width="160">创建时间</th>
+                        <th width="160">备份状态</th>
+                        <th width="120">操作</th>
                     </tr>
                 </thead>
                 <tbody>
-				<?php if(!empty($list)): if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?><tr>
-                        <td><input class="ids row-selected" type="checkbox" name="id[]" value="<?php echo ($menu["id"]); ?>"></td>
-                        <td><?php echo ($menu["id"]); ?></td>
-                        <td>
-                            <a href="<?php echo U('index?pid='.$menu['id']);?>"><?php echo ($menu["title"]); ?></a>
-                        </td>
-                        <td><?php echo ((isset($menu["up_title"]) && ($menu["up_title"] !== ""))?($menu["up_title"]):'无'); ?></td>
-                        <td><?php echo ($menu["group"]); ?></td>
-                        <td><?php echo ($menu["url"]); ?></td>
-                        <td><?php echo ($menu["sort"]); ?></td>
-                        <td>
-                            <a href="<?php echo U('toogleDev',array('id'=>$menu['id'],'value'=>abs($menu['is_dev']-1)));?>" class="ajax-get">
-                            <?php echo ($menu["is_dev_text"]); ?>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="<?php echo U('toogleHide',array('id'=>$menu['id'],'value'=>abs($menu['hide']-1)));?>" class="ajax-get">
-                            <?php echo ($menu["hide_text"]); ?>
-                            </a>
-                        </td>
-                        <td>
-                            <a title="编辑" href="<?php echo U('edit?id='.$menu['id']);?>">编辑</a>
-                            <a class="confirm ajax-get" title="删除" href="<?php echo U('del?id='.$menu['id']);?>">删除</a>
-                        </td>
-                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-				<?php else: ?>
-				<td colspan="10" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
+                    <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$table): $mod = ($i % 2 );++$i;?><tr>
+                            <td class="num">
+                                <input class="ids" checked="chedked" type="checkbox" name="tables[]" value="<?php echo ($table["name"]); ?>">
+                            </td>
+                            <td><?php echo ($table["name"]); ?></td>
+                            <td><?php echo ($table["rows"]); ?></td>
+                            <td><?php echo (format_bytes($table["data_length"])); ?></td>
+                            <td><?php echo ($table["create_time"]); ?></td>
+                            <td class="info">未备份</td>
+                            <td class="action">
+                                <a class="ajax-get no-refresh" href="<?php echo U('optimize?tables='.$table['name']);?>">优化表</a>&nbsp;
+                                <a class="ajax-get no-refresh" href="<?php echo U('repair?tables='.$table['name']);?>">修复表</a>
+                            </td>
+                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                 </tbody>
             </table>
         </form>
-        <!-- 分页 -->
-        <div class="page">
-
-        </div>
     </div>
+    <!-- /应用列表 -->
 
         </div>
         <div class="cont-ft">
@@ -253,47 +227,82 @@
     </script>
     
     <script type="text/javascript">
-        $(function() {
-            //搜索功能
-            $("#search").click(function() {
-                var url = $(this).attr('url');
-                var query = $('.search-form').find('input').serialize();
-                query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
-                query = query.replace(/^&/g, '');
-                if (url.indexOf('?') > 0) {
-                    url += '&' + query;
-                } else {
-                    url += '?' + query;
-                }
-                window.location.href = url;
-            });
-            //回车搜索
-            $(".search-input").keyup(function(e) {
-                if (e.keyCode === 13) {
-                    $("#search").click();
-                    return false;
-                }
-            });
-            //导航高亮
-            highlight_subnav('<?php echo U('index');?>');
-            //点击排序
-        	$('.list_sort').click(function(){
-        		var url = $(this).attr('url');
-        		var ids = $('.ids:checked');
-        		var param = '';
-        		if(ids.length > 0){
-        			var str = new Array();
-        			ids.each(function(){
-        				str.push($(this).val());
-        			});
-        			param = str.join(',');
-        		}
+    (function($){
+        var $form = $("#export-form"), $export = $("#export"), tables
+            $optimize = $("#optimize"), $repair = $("#repair");
 
-        		if(url != undefined && url != ''){
-        			window.location.href = url + '/ids/' + param;
-        		}
-        	});
+        $optimize.add($repair).click(function(){
+            $.post(this.href, $form.serialize(), function(data){
+                if(data.status){
+                    updateAlert(data.info,'alert-success');
+                } else {
+                    updateAlert(data.info,'alert-error');
+                }
+                setTimeout(function(){
+	                $('#top-alert').find('button').click();
+	                $(that).removeClass('disabled').prop('disabled',false);
+	            },1500);
+            }, "json");
+            return false;
         });
+
+        $export.click(function(){
+            $export.parent().children().addClass("disabled");
+            $export.html("正在发送备份请求...");
+            $.post(
+                $form.attr("action"),
+                $form.serialize(),
+                function(data){
+                    if(data.status){
+                        tables = data.tables;
+                        $export.html(data.info + "开始备份，请不要关闭本页面！");
+                        backup(data.tab);
+                        window.onbeforeunload = function(){ return "正在备份数据库，请不要关闭！" }
+                    } else {
+                        updateAlert(data.info,'alert-error');
+                        $export.parent().children().removeClass("disabled");
+                        $export.html("立即备份");
+                        setTimeout(function(){
+        	                $('#top-alert').find('button').click();
+        	                $(that).removeClass('disabled').prop('disabled',false);
+        	            },1500);
+                    }
+                },
+                "json"
+            );
+            return false;
+        });
+
+        function backup(tab, status){
+            status && showmsg(tab.id, "开始备份...(0%)");
+            $.get($form.attr("action"), tab, function(data){
+                if(data.status){
+                    showmsg(tab.id, data.info);
+
+                    if(!$.isPlainObject(data.tab)){
+                        $export.parent().children().removeClass("disabled");
+                        $export.html("备份完成，点击重新备份");
+                        window.onbeforeunload = function(){ return null }
+                        return;
+                    }
+                    backup(data.tab, tab.id != data.tab.id);
+                } else {
+                    updateAlert(data.info,'alert-error');
+                    $export.parent().children().removeClass("disabled");
+                    $export.html("立即备份");
+                    setTimeout(function(){
+    	                $('#top-alert').find('button').click();
+    	                $(that).removeClass('disabled').prop('disabled',false);
+    	            },1500);
+                }
+            }, "json");
+
+        }
+
+        function showmsg(id, msg){
+            $form.find("input[value=" + tables[id] + "]").closest("tr").find(".info").html(msg);
+        }
+    })(jQuery);
     </script>
 
 </body>

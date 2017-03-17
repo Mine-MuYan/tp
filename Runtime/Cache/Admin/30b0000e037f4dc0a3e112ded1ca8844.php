@@ -85,78 +85,51 @@
             
 
             
+    <!-- 标题栏 -->
     <div class="main-title">
-        <h2><?php if(isset($data)): ?>[ <?php echo ($data["title"]); ?> ] 子<?php endif; ?>菜单管理 </h2>
+        <h2>客户投资记录</h2>
     </div>
-
-    <div class="cf">
-        <a class="btn" href="<?php echo U('add',array('pid'=>I('get.pid',0)));?>">新 增</a>
-        <button class="btn ajax-post confirm" url="<?php echo U('del');?>" target-form="ids">删 除</button>
-        <a class="btn" href="<?php echo U('import',array('pid'=>I('get.pid',0)));?>">导 入</a>
-        <button class="btn list_sort" url="<?php echo U('sort',array('pid'=>I('get.pid',0)),'');?>">排序</button>
-        <!-- 高级搜索 -->
-        <div class="search-form fr cf">
-            <div class="sleft">
-                <input type="text" name="title" class="search-input" value="<?php echo I('title');?>" placeholder="请输入菜单名称">
-                <a class="sch-btn" href="javascript:;" id="search" url="/index.php?s=/Admin/Menu/index/pid/129.html"><i class="btn-search"></i></a>
-            </div>
-        </div>
-    </div>
-
+    <!-- 数据列表 -->
     <div class="data-table table-striped">
-        <form class="ids">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="row-selected">
-                            <input class="checkbox check-all" type="checkbox">
-                        </th>
-                        <th>ID</th>
-                        <th>名称</th>
-                        <th>上级菜单</th>
-                        <th>分组</th>
-                        <th>URL</th>
-                        <th>排序</th>
-                        <th>仅开发者模式显示</th>
-                        <th>隐藏</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-				<?php if(!empty($list)): if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$menu): $mod = ($i % 2 );++$i;?><tr>
-                        <td><input class="ids row-selected" type="checkbox" name="id[]" value="<?php echo ($menu["id"]); ?>"></td>
-                        <td><?php echo ($menu["id"]); ?></td>
-                        <td>
-                            <a href="<?php echo U('index?pid='.$menu['id']);?>"><?php echo ($menu["title"]); ?></a>
-                        </td>
-                        <td><?php echo ((isset($menu["up_title"]) && ($menu["up_title"] !== ""))?($menu["up_title"]):'无'); ?></td>
-                        <td><?php echo ($menu["group"]); ?></td>
-                        <td><?php echo ($menu["url"]); ?></td>
-                        <td><?php echo ($menu["sort"]); ?></td>
-                        <td>
-                            <a href="<?php echo U('toogleDev',array('id'=>$menu['id'],'value'=>abs($menu['is_dev']-1)));?>" class="ajax-get">
-                            <?php echo ($menu["is_dev_text"]); ?>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="<?php echo U('toogleHide',array('id'=>$menu['id'],'value'=>abs($menu['hide']-1)));?>" class="ajax-get">
-                            <?php echo ($menu["hide_text"]); ?>
-                            </a>
-                        </td>
-                        <td>
-                            <a title="编辑" href="<?php echo U('edit?id='.$menu['id']);?>">编辑</a>
-                            <a class="confirm ajax-get" title="删除" href="<?php echo U('del?id='.$menu['id']);?>">删除</a>
-                        </td>
-                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-				<?php else: ?>
-				<td colspan="10" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
-                </tbody>
-            </table>
-        </form>
-        <!-- 分页 -->
-        <div class="page">
+        <table class="">
+            <thead>
+            <tr>
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th class="">序号</th>
+                <th class="">用户ID</th>
+                <th class="">标ID</th>
+                <th class="">标名称</th>
+                <th class="">投资金额</th>
+                <th class="">投资来源</th>
+                <th class="">投标订单号</th>
+                <th class="">标期限</th>
+                <th class="">邀请人</th>
+                <th class="">投资时间</th>
+                <th class="">借款到期时间</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        </div>
+            <?php if(is_array($qy_users_invest)): $i = 0; $__LIST__ = $qy_users_invest;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                    <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
+                    <td><?php echo ($vo["id"]); ?> </td>
+                    <td><?php echo ($vo["user_id"]); ?> </td>
+                    <td><?php echo ($vo["borrow_nid"]); ?> </td>
+                    <td><?php echo ($vo["name"]); ?> </td>
+                    <td><?php echo ($vo["account"]); ?> </td>
+                    <td><?php echo ($vo["sources"]); ?> </td>
+                    <td><?php echo ($vo["tender_id"]); ?> </td>
+                    <td><?php echo ($vo["borrow_period"]); ?> </td>
+                    <td><?php echo ($vo["staff"]); ?> </td>
+                    <td><?php echo (date('Y-m-d H:i:s',$vo["addtime"])); ?> </td>
+                    <td><?php echo (date('Y-m-d H:i:s',$vo["repay_last_time"])); ?> </td>
+                </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        <?php echo ($_page); ?>
     </div>
 
         </div>
@@ -252,48 +225,31 @@
         }();
     </script>
     
-    <script type="text/javascript">
-        $(function() {
-            //搜索功能
-            $("#search").click(function() {
-                var url = $(this).attr('url');
-                var query = $('.search-form').find('input').serialize();
-                query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
-                query = query.replace(/^&/g, '');
-                if (url.indexOf('?') > 0) {
-                    url += '&' + query;
-                } else {
-                    url += '?' + query;
-                }
-                window.location.href = url;
-            });
-            //回车搜索
-            $(".search-input").keyup(function(e) {
-                if (e.keyCode === 13) {
-                    $("#search").click();
-                    return false;
-                }
-            });
-            //导航高亮
-            highlight_subnav('<?php echo U('index');?>');
-            //点击排序
-        	$('.list_sort').click(function(){
-        		var url = $(this).attr('url');
-        		var ids = $('.ids:checked');
-        		var param = '';
-        		if(ids.length > 0){
-        			var str = new Array();
-        			ids.each(function(){
-        				str.push($(this).val());
-        			});
-        			param = str.join(',');
-        		}
+    <script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
 
-        		if(url != undefined && url != ''){
-        			window.location.href = url + '/ids/' + param;
-        		}
-        	});
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function(){
+            var url = $(this).attr('url');
+            var query  = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+            query = query.replace(/^&/g,'');
+            if( url.indexOf('?')>0 ){
+                url += '&' + query;
+            }else{
+                url += '?' + query;
+            }
+            window.location.href = url;
         });
+        //回车搜索
+        $(".search-input").keyup(function(e){
+            if(e.keyCode === 13){
+                $("#search").click();
+                return false;
+            }
+        });
+        //导航高亮
+        //highlight_subnav('<?php echo U('User/hygl');?>');
     </script>
 
 </body>

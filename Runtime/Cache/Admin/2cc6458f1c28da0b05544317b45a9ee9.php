@@ -116,10 +116,9 @@
                     <td><?php echo ($vo["phone"]); ?> </td>
                     <td><?php echo ($vo["card_id"]); ?> </td>
                     <td><?php echo ($vo["accout"]); ?> </td>
-                    <td><?php echo ($vo["reg_time"]); ?> </td>
+                    <td><?php echo (date('Y-m-d H:i:s',$vo["reg_time"])); ?></td>
                     <td><?php echo ($vo["staff"]); ?> </td>
-                    <td><a href="">查看投资记录</a></td>
-
+                    <td><a href="<?php echo U('qy_users_invest',array('user_id'=>$vo['user_id']));?>">查看投资记录</a></td>
                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
             </tbody>
