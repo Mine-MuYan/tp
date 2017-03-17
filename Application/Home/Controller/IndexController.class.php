@@ -97,16 +97,27 @@ class IndexController extends HomeController {
             $list_jm=$redis->rpop("channelAaaReverify");
             $one=$DES3->decrypt($list_jm);
             $one=json_decode($one,true);
-            p($one);die;
             $where_invest['borrow_nid']= $one['borrow_nid'];
             $data_invest['repay_last_time']=$one['repay_last_time'];
-            $res=$db_invest->where($where_invest)->data($data_invest)->save( );
+            $res=$db_invest->where($where_invest)->data($data_invest)->save();
         }
         echo 'success';
     }
 
+    //余额数据对整
+    public function saveye(){
+        $db_invest=M('user');
+        $list='';
+        $list=json_decode($one,true);
+        $zs=count($list);
+        for($i=0;$i< $zs;$i++){
+            $where_user['user_id']= $list[$i]['user_id'];
+            $data_user['account']=$list[$i]['account'];
+            $res=$db_invest->where($where_user)->data($data_user)->save();
+        }
+        echo 'success';
+    }
 
-
-
+    
 
 }
