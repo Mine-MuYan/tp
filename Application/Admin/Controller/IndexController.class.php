@@ -333,7 +333,9 @@ class IndexController extends AdminController {
     /**
      * 客户投资汇总
      */
-    public function a(){}
+    public function users_invest_total(){
+
+    }
 
 
 
