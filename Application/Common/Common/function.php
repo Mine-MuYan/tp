@@ -955,8 +955,8 @@ function get_stemma($pids,Model &$model, $field='id'){
  * print_r()函数简化
  */
 function p($str){
-    echo '<pre>';
+    echo '<div><pre>';
     print_r($str);
-    echo '</pre>';
+    echo '</pre></div>';
 
 }

@@ -92,13 +92,17 @@ class IndexController extends AdminController {
         $data_ucenter_member['reg_time'] = time();
         $data_ucenter_member['status'] = 1;
         $data_ucenter_member['dj'] = 1;
-        //$data_ucenter_member['reg_ip'] = get_client_ip();
         $db_ucenter_member = M('ucenter_member');
         $where_ucenter_member['username'] = I('username');
         $res = $db_ucenter_member->where($where_ucenter_member)->select();
         if ($res == null) {
-            $db_ucenter_member->data($data_ucenter_member)->add();
-            $this->success('二级会员添加成功', 'Admin/Index/addqy');
+            $ress=$db_ucenter_member->data($data_ucenter_member)->add();
+            $db_member=M('member');
+            $data['nickname']=$data_ucenter_member['username'];
+            $data['status']=1;
+            $data['uid']=$ress;
+            $db_member->data($data)->add();
+            $this->success('二级管理员添加成功', 'Admin/Index/addqy');
         } else {
             $this->error('用户名已存在，请重新输入。');
         }
@@ -132,7 +136,12 @@ class IndexController extends AdminController {
         if($res !== null){
             $this->error('用户名已存在，请重新输入。');
         }else{
-            $db_ucenter_member->data($data_ucenter_member)->add();
+            $ress=$db_ucenter_member->data($data_ucenter_member)->add();
+            $db_member=M('member');
+            $data['nickname']=$data_ucenter_member['username'];
+            $data['status']=1;
+            $data['uid']=$ress;
+            $db_member->data($data)->add();
             $this->success('三级营业部添加成功', 'Admin/Index/addyyb');
         }
     }
@@ -166,7 +175,12 @@ class IndexController extends AdminController {
         if($res !== null){
             $this->error('用户名已存在，请重新输入。');
         }else{
-            $db_ucenter_member->data($data_ucenter_member)->add();
+            $ress=$db_ucenter_member->data($data_ucenter_member)->add();
+            $db_member=M('member');
+            $data['nickname']=$data_ucenter_member['username'];
+            $data['status']=1;
+            $data['uid']=$ress;
+            $db_member->data($data)->add();
             $this->success('四级员工添加成功', 'Admin/Index/addyg');
         }
     }
@@ -183,7 +197,7 @@ class IndexController extends AdminController {
     }
 
     /**
-     * 二级区域会员编辑的动作页面
+     * 二级区域管理员编辑的动作页面
      */
     public function qy_editing(){
         $db_ucenter_member = M('ucenter_member');
@@ -201,7 +215,7 @@ class IndexController extends AdminController {
         $db_ucenter_member = M('ucenter_member');
         $where_ucenter_member['id'] = I('id');
         $a =$db_ucenter_member->where($where_ucenter_member)->limit('1')->delete();
-        $this->success('会员删除成功。', 'Admin/Index/qy_hygl');
+        $this->success('管理员删除成功。', 'Admin/Index/qy_hygl');
 
     }
 
@@ -227,7 +241,7 @@ class IndexController extends AdminController {
         $data_ucenter_member['password'] = md5(sha1(I('password')) . 'c+o<-,M#~HWuK$^2*yE{iL)NB[9zlhw|Jqr/6ejf');
         $data_ucenter_member['qy'] =I('yyb_edit_2');
         $where_ucenter_member['id'] = I('id');
-        $db_ucenter_member->where($where_ucenter_member)->data($data_ucenter_member)->save(); //修改当前会员信息
+        $db_ucenter_member->where($where_ucenter_member)->data($data_ucenter_member)->save(); //修改当前管理员信息
         $this->success('三级营业部修改成功', 'Admin/Index/yyb_hygl');
     }
 
@@ -240,7 +254,7 @@ class IndexController extends AdminController {
         $where_ucenter_member['id']=I('id');  //当前用户的ID
         $yg_edit = $db_ucenter_member->where($where_ucenter_member)->find();
         $where_ucenter_member1['dj']=2 ;   // 所属上级
-        $a = $yg_edit_2 = $db_ucenter_member->where($where_ucenter_member1)->select();
+        $yg_edit_2 = $db_ucenter_member->where($where_ucenter_member1)->select();
         $this->assign('yg_edit',$yg_edit);
         $this->assign('yg_edit_2',$yg_edit_2);
         $this->display('Edit/yg_edit');
@@ -252,14 +266,52 @@ class IndexController extends AdminController {
     public function yg_editing(){
         $db_ucenter_member = M('ucenter_member');
         $data_ucenter_member['password'] = md5(sha1(I('password')) . 'c+o<-,M#~HWuK$^2*yE{iL)NB[9zlhw|Jqr/6ejf');
-        $where_ucenter_member['id'] = I('id');
         $data_ucenter_member['yyb'] = I('yg_edit_2');
-        $db_ucenter_member->where($where_ucenter_member)->data($data_ucenter_member)->save(); //修改当前会员信息
+        $where_ucenter_member['id'] = I('id');
+        $db_ucenter_member->where($where_ucenter_member)->data($data_ucenter_member)->save(); //修改当前管理员信息
         $this->success('四级员工修改成功', 'Admin/Index/yg_hygl');
-
     }
 
+    public function qy_users(){
+        $db_user = M('user');
+        if(UID==1){
+            $where = null;
+        }else{
+            $db_ucenter_member = M('ucenter_member');
+            $where_id['id']=UID;
+            $res=$db_ucenter_member->where($where_id)->find();
+            if($res['dj'] ==3 ){
+                $where['staff']=$res['username'];
+            }elseif($res['dj']==2){
+                $where_yyb['yyb']=$res['username'];
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }elseif ($res['dj']==1){
+                $where_qy['qy']=$res['username'];
+                $array_qy=$db_ucenter_member->field('username')->where($where_qy)->select();
+                for($i=0;$i<count($array_qy);$i++){
+                    $array_qy_num[]=$array_qy[$i]['username'];
+                }
+                $where_yyb['yyb']=array('in',$array_qy_num);
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }
 
+        }
+        $count      = $db_user->where($where)->count();
+        $Page       = new \Think\Page($count,10);
+        $show       = $Page->show();
+        $qy_user = $db_user-> order('user_id') ->where($where)-> limit($Page->firstRow.','.$Page->listRows) -> select();
+        $this->assign('qy_user',$qy_user);
+        $this->assign('_page',$show);
+        $this->display('Users/qy_users');
+    }
 
 
 

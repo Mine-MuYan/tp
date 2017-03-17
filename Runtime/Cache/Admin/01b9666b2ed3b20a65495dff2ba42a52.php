@@ -85,44 +85,36 @@
             
 
             
-	<!-- 标题栏 -->
 	<div class="main-title">
-		<h2>四级（员工）管理会员列表</h2>
+		<h2><?php echo ($auth_group['id']?'编辑':'新增'); ?>用户组</h2>
 	</div>
-    <!-- 数据列表 -->
-    <div class="data-table table-striped">
-	<table class="">
-    <thead>
-        <tr>
-		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">所属三级（营业部）</th>
-		<th class="">邮箱</th>
-		<th class="">操作</th>
-		</tr>
-    </thead>
-    <tbody>
 
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["yyb"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
-			<td>
-				<a href="<?php echo U('yg_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
-				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
-
-			</td>
-		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
-	</tbody>
-    </table>
-	</div>
-    <div class="page">
-        <?php echo ($_page); ?>
-    </div>
+    <form action="<?php echo U('AuthManager/writeGroup');?>" enctype="application/x-www-form-urlencoded" method="POST"
+            class="form-horizontal">
+        <div class="form-item">
+            <label for="auth-title" class="item-label">用户组</label>
+            <div class="controls">
+                <input id="auth-title" type="text" name="title" class="text input-large" value="<?php echo ($auth_group["title"]); ?>"/>
+            </div>
+        </div>
+        <div class="form-item">
+            <label for="auth-description" class="item-label">描述</label>
+            <div class="controls">
+                <label class="textarea input-large"><textarea id="auth-description" type="text" name="description"><?php echo ($auth_group["description"]); ?></textarea></label>
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="<?php echo ($auth_group["id"]); ?>" />
+            <button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+<block>
+<block name="script">
+<script type="text/javascript" charset="utf-8">
+    //导航高亮
+    highlight_subnav('<?php echo U('AuthManager/index');?>');
+</script>
 
         </div>
         <div class="cont-ft">
@@ -217,32 +209,5 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
-
-	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
-	});
-    //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
-	</script>
-
 </body>
 </html>

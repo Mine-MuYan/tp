@@ -87,38 +87,52 @@
             
 	<!-- 标题栏 -->
 	<div class="main-title">
-		<h2>四级（员工）管理会员列表</h2>
+		<h2>权限管理</h2>
 	</div>
-    <!-- 数据列表 -->
-    <div class="data-table table-striped">
+
+    <div class="tools auth-botton">
+        <a id="add-group" class="btn" href="<?php echo U('createGroup');?>">新 增</a>
+        <a url="<?php echo U('changestatus',array('method'=>'resumeGroup'));?>" class="btn ajax-post" target-form="ids" >启 用</a>
+        <a url="<?php echo U('changestatus',array('method'=>'forbidGroup'));?>" class="btn ajax-post" target-form="ids" >禁 用</a>
+        <a url="<?php echo U('changestatus',array('method'=>'deleteGroup'));?>" class="btn ajax-post confirm" target-form="ids" >删 除</a>
+    </div>
+	<!-- 数据列表 -->
+	<div class="data-table table-striped">
 	<table class="">
     <thead>
         <tr>
 		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">所属三级（营业部）</th>
-		<th class="">邮箱</th>
+		<th class="">用户组</th>
+		<th class="">描述</th>
+
+		<th class="">授权</th>
+		<th class="">状态</th>
 		<th class="">操作</th>
 		</tr>
     </thead>
     <tbody>
-
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+		<?php if(!empty($_list)): if(is_array($_list)): $i = 0; $__LIST__ = $_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
             <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["yyb"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
-			<td>
-				<a href="<?php echo U('yg_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
-				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
+			<td><a href="<?php echo U('AuthManager/editgroup?id='.$vo['id']);?>"><?php echo ($vo["title"]); ?></a> </td>
+			<td><span><?php echo mb_strimwidth($vo['description'],0,60,"...","utf-8");?></span></td>
 
+
+			<td><a href="<?php echo U('AuthManager/access?group_name='.$vo['title'].'&group_id='.$vo['id']);?>" >访问授权</a>
+			<a href="<?php echo U('AuthManager/category?group_name='.$vo['title'].'&group_id='.$vo['id']);?>" >分类授权</a>
+			<a href="<?php echo U('AuthManager/user?group_name='.$vo['title'].'&group_id='.$vo['id']);?>" >成员授权</a>
 			</td>
+			<td><?php echo ($vo["status_text"]); ?></td>
+			<td><?php if(($vo["status"]) == "1"): ?><a href="<?php echo U('AuthManager/changeStatus?method=forbidGroup&id='.$vo['id']);?>" class="ajax-get">禁用</a>
+				<?php else: ?>
+				<a href="<?php echo U('AuthManager/changeStatus?method=resumeGroup&id='.$vo['id']);?>" class="ajax-get">启用</a><?php endif; ?>
+				<a href="<?php echo U('AuthManager/changeStatus?method=deleteGroup'.$vo['id']);?>" class="confirm ajax-get">删除</a>
+                </td>
 		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
+		<?php else: ?>
+		<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td><?php endif; ?>
 	</tbody>
     </table>
+
 	</div>
     <div class="page">
         <?php echo ($_page); ?>
@@ -217,32 +231,10 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
-
-	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
-	});
+<script type="text/javascript" charset="utf-8">
     //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
-	</script>
+    highlight_subnav('<?php echo U('AuthManager/index');?>');
+</script>
 
 </body>
 </html>

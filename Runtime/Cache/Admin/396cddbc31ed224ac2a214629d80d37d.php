@@ -238,7 +238,7 @@
 		}
 	});
     //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
+    highlight_subnav('<?php echo U('User/qy_hygl');?>');
 	</script>
 
 </body>

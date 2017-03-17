@@ -85,44 +85,38 @@
             
 
             
-	<!-- 标题栏 -->
-	<div class="main-title">
-		<h2>四级（员工）管理会员列表</h2>
-	</div>
-    <!-- 数据列表 -->
-    <div class="data-table table-striped">
-	<table class="">
-    <thead>
-        <tr>
-		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">所属三级（营业部）</th>
-		<th class="">邮箱</th>
-		<th class="">操作</th>
-		</tr>
-    </thead>
-    <tbody>
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li><a href="<?php echo U('AuthManager/access',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')));?>">访问授权</a></li>
+        <li class="current"><a href="javascript:;">分类授权</a></li>
+		<li><a href="<?php echo U('AuthManager/user',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')));?>">成员授权</a></li>
+	    <li class="fr">
+		    <select name="group">
+			    <?php if(is_array($auth_group)): $i = 0; $__LIST__ = $auth_group;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo U('AuthManager/category',array('group_id'=>$vo['id'],'group_name'=>$vo['title']));?>" <?php if(($vo['id']) == $this_group['id']): ?>selected<?php endif; ?> ><?php echo ($vo["title"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+		    </select>
+	    </li>
+    </ul>
+    <!-- 表格列表 -->
+    <div class="tb-unit posr">
+        <form class="save-category" action="<?php echo U('AuthManager/addToCategory');?>" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="group_id" value="<?php echo I('group_id');?>">
+            <div class="category auth-category">
+                <div class="hd cf">
+                    <div class="fold">折叠</div>
+                    <div class="order">选择</div>
+                    <div class="name">栏目名称</div>
+                </div>
+                <?php echo R('AuthManager/tree', array($group_list));?>
+            </div>
 
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["yyb"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
-			<td>
-				<a href="<?php echo U('yg_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
-				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
-
-			</td>
-		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
-	</tbody>
-    </table>
-	</div>
-    <div class="page">
-        <?php echo ($_page); ?>
+            <div class="tb-unit-bar">
+                <button class="btn submit-btn ajax-post" type="submit" target-form="save-category">确 定</button>
+                <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+            </div>
+        </form>
     </div>
+</div>
+<!-- /表格列表 -->
 
         </div>
         <div class="cont-ft">
@@ -217,32 +211,36 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
+<script type="text/javascript">
+    +function($){
+        /* 分类展开收起 */
+        $(".category dd").prev().find(".fold i").addClass("icon-unfold")
+            .click(function(){
+                var self = $(this);
+                if(self.hasClass("icon-unfold")){
+                    self.closest("dt").next().slideUp("fast", function(){
+                        self.removeClass("icon-unfold").addClass("icon-fold");
+                    });
+                } else {
+                    self.closest("dt").next().slideDown("fast", function(){
+                        self.removeClass("icon-fold").addClass("icon-unfold");
+                    });
+                }
+            });
 
-	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
-	});
+        var auth_groups = [<?php echo ($authed_group); ?>];
+        $('.cate_id').each(function(){
+            if( $.inArray( parseInt(this.value,10),auth_groups )>-1 ){
+                $(this).prop('checked',true);
+            }
+        });
+	    $('select[name=group]').change(function(){
+		    location.href = this.value;
+	    });
+    }(jQuery);
     //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
-	</script>
+    highlight_subnav('<?php echo U('AuthManager/index');?>');
+</script>
 
 </body>
 </html>

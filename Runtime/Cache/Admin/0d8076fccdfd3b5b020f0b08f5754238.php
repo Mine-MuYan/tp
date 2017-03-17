@@ -85,44 +85,60 @@
             
 
             
-	<!-- 标题栏 -->
-	<div class="main-title">
-		<h2>四级（员工）管理会员列表</h2>
-	</div>
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li><a href="<?php echo U('AuthManager/access',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')));?>">访问授权</a></li>
+        <li><a href="<?php echo U('AuthManager/category',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')));?>">分类授权</a></li>
+		<li class="current"><a href="javascript:;">成员授权</a></li>
+	    <li class="fr">
+		    <select name="group">
+			    <?php if(is_array($auth_group)): $i = 0; $__LIST__ = $auth_group;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo U('AuthManager/user',array('group_id'=>$vo['id'],'group_name'=>$vo['title']));?>" <?php if(($vo['id']) == $this_group['id']): ?>selected<?php endif; ?> ><?php echo ($vo["title"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+		    </select>
+	    </li>
+    </ul>
     <!-- 数据列表 -->
     <div class="data-table table-striped">
 	<table class="">
     <thead>
         <tr>
-		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">所属三级（营业部）</th>
-		<th class="">邮箱</th>
+		<th class="">UID</th>
+		<th class="">昵称</th>
+		<th class="">最后登录时间</th>
+		<th class="">最后登录IP</th>
+		<th class="">状态</th>
 		<th class="">操作</th>
 		</tr>
     </thead>
     <tbody>
+		<?php if(is_array($_list)): $i = 0; $__LIST__ = $_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+			<td><?php echo ($vo["uid"]); ?> </td>
+			<td><?php echo ($vo["nickname"]); ?></td>
+			<td><span><?php echo (time_format($vo["last_login_time"])); ?></span></td>
+			<td><span><?php echo (long2ip($vo["last_login_ip"])); ?></span></td>
+			<td><?php echo ($vo["status_text"]); ?></td>
+			<td><a href="<?php echo U('AuthManager/removeFromGroup?uid='.$vo['uid'].'&group_id='.I('group_id'));?>" class="ajax-get">解除授权</a>
 
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["yyb"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
-			<td>
-				<a href="<?php echo U('yg_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
-				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
-
-			</td>
+                </td>
 		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
-
 	</tbody>
     </table>
-	</div>
-    <div class="page">
-        <?php echo ($_page); ?>
+
+
     </div>
+	<div class="main-title">
+		<div class="page_nav fl">
+			<?php echo ($_page); ?>
+		</div>
+		<div id="add-to-group" class="tools fr">
+			<form class="add-user" action="<?php echo U('addToGroup');?>" method="post" enctype="application/x-www-form-urlencoded" >
+				<input class="text input-4x" type="text" name="uid" placeholder="请输入uid,多个用英文逗号分隔">
+				<input type="hidden" name="group_id" value="<?php echo I('group_id');?>">
+                <button type="submit" class="btn ajax-post" target-form="add-user">新 增</button>
+			</form>
+		</div>
+	</div>
+
+</div>
 
         </div>
         <div class="cont-ft">
@@ -217,32 +233,13 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
-
-	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
+<script type="text/javascript" charset="utf-8">
+	$('select[name=group]').change(function(){
+		location.href = this.value;
 	});
     //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
-	</script>
+    highlight_subnav('<?php echo U('AuthManager/index');?>');
+</script>
 
 </body>
 </html>

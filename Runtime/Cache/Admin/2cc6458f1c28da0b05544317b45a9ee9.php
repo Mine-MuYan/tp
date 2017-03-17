@@ -85,41 +85,46 @@
             
 
             
-	<!-- 标题栏 -->
-	<div class="main-title">
-		<h2>四级（员工）管理会员列表</h2>
-	</div>
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>客户列表</h2>
+    </div>
     <!-- 数据列表 -->
     <div class="data-table table-striped">
-	<table class="">
-    <thead>
-        <tr>
-		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">ID</th>
-		<th class="">用户名</th>
-		<th class="">所属三级（营业部）</th>
-		<th class="">邮箱</th>
-		<th class="">操作</th>
-		</tr>
-    </thead>
-    <tbody>
+        <table class="">
+            <thead>
+            <tr>
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th class="">ID</th>
+                <th class="">用户名</th>
+                <th class="">姓名</th>
+                <th class="">电话</th>
+                <th class="">身份证</th>
+                <th class="">账户余额</th>
+                <th class="">注册时间</th>
+                <th class="">邀请人</th>
+                <th class="">操作</th>
+            </tr>
+            </thead>
+            <tbody>
 
-		<?php if(is_array($list_hygl)): $i = 0; $__LIST__ = $list_hygl;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-            <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
-			<td><?php echo ($vo["id"]); ?> </td>
-			<td><?php echo ($vo["username"]); ?> </td>
-			<td><?php echo ($vo["yyb"]); ?> </td>
-			<td><?php echo ($vo["email"]); ?> </td>
-			<td>
-				<a href="<?php echo U('yg_edit',array('id'=>$vo['id']));?>"><span>编辑</span></a>  |
-				<a href="<?php echo U('hy_del',array('id'=>$vo['id']));?>"><span>删除</span></a>
+            <?php if(is_array($qy_user)): $i = 0; $__LIST__ = $qy_user;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+                    <td><input class="ids" type="checkbox" name="id[]" value="<?php echo ($vo["id"]); ?>" /></td>
+                    <td><?php echo ($vo["user_id"]); ?> </td>
+                    <td><?php echo ($vo["username"]); ?> </td>
+                    <td><?php echo ($vo["realname"]); ?> </td>
+                    <td><?php echo ($vo["phone"]); ?> </td>
+                    <td><?php echo ($vo["card_id"]); ?> </td>
+                    <td><?php echo ($vo["accout"]); ?> </td>
+                    <td><?php echo ($vo["reg_time"]); ?> </td>
+                    <td><?php echo ($vo["staff"]); ?> </td>
+                    <td><a href="">查看投资记录</a></td>
 
-			</td>
-		</tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 
-	</tbody>
-    </table>
-	</div>
+            </tbody>
+        </table>
+    </div>
     <div class="page">
         <?php echo ($_page); ?>
     </div>
@@ -217,32 +222,32 @@
         }();
     </script>
     
-	<script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
+    <script src="/Public/static/thinkbox/jquery.thinkbox.js"></script>
 
-	<script type="text/javascript">
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-        var query  = $('.search-form').find('input').serialize();
-        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
-        query = query.replace(/^&/g,'');
-        if( url.indexOf('?')>0 ){
-            url += '&' + query;
-        }else{
-            url += '?' + query;
-        }
-		window.location.href = url;
-	});
-	//回车搜索
-	$(".search-input").keyup(function(e){
-		if(e.keyCode === 13){
-			$("#search").click();
-			return false;
-		}
-	});
-    //导航高亮
-    highlight_subnav('<?php echo U('User/hygl');?>');
-	</script>
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function(){
+            var url = $(this).attr('url');
+            var query  = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+            query = query.replace(/^&/g,'');
+            if( url.indexOf('?')>0 ){
+                url += '&' + query;
+            }else{
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function(e){
+            if(e.keyCode === 13){
+                $("#search").click();
+                return false;
+            }
+        });
+        //导航高亮
+        //highlight_subnav('<?php echo U('User/hygl');?>');
+    </script>
 
 </body>
 </html>
