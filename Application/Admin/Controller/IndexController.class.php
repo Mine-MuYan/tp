@@ -331,6 +331,21 @@ class IndexController extends AdminController {
     }
 
     /**
+     *编辑客户邀请人
+     */
+    public function users_invest_edit(){
+
+
+
+
+
+
+
+        
+        $this->display('Users/users_invest_edit');
+    }
+
+    /**
      * 客户投资汇总
      */
     public function users_invest_total(){
