@@ -334,16 +334,22 @@ class IndexController extends AdminController {
      *编辑客户邀请人
      */
     public function users_invest_edit(){
-
-
-
-
-
-
-
-        
+        $db_user = M('user');
+        $where_user['user_id'] = I('user_id');
+        $user =$db_user->where($where_user)->find();
+        $this->assign('user',$user);
         $this->display('Users/users_invest_edit');
     }
+
+    public function users_invest_editing(){
+        $db_user = M('user');
+        $where_user[user_id]= I('user_id');
+        $data_user['staff'] = I('staff');
+        $db_user->where($where_user)->data($data_user)->save();
+        $this->success('客户的邀请人修改成功', 'Admin/Index/users');
+    }
+
+
 
     /**
      * 客户投资汇总
