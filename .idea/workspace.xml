@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="ecaed4b9-f5ed-4d71-a96d-41485d699d39" name="默认的" comment="redis">
+=======
+    <list default="true" id="ecaed4b9-f5ed-4d71-a96d-41485d699d39" name="默认的" comment="">
+>>>>>>> origin/redis
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="channeladmin.iws" />
@@ -39,8 +43,13 @@
       <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="358">
               <caret line="120" column="23" selection-start-line="120" selection-start-column="23" selection-end-line="120" selection-end-column="23" />
+=======
+            <state vertical-scroll-proportion="0.8784722">
+              <caret line="121" column="5" selection-start-line="106" selection-start-column="4" selection-end-line="121" selection-end-column="5" />
+>>>>>>> origin/redis
               <folding />
             </state>
           </provider>
@@ -366,6 +375,7 @@
       <option name="project" value="LOCAL" />
       <updated>1489733605465</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00002" summary="进一步同步数据">
       <created>1489734580500</created>
       <option name="number" value="00002" />
@@ -381,13 +391,38 @@
       <updated>1489737630865</updated>
     </task>
     <option name="localTasksCounter" value="4" />
+=======
+    <task id="LOCAL-00002" summary="redis">
+      <created>1489735616244</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1489735616244</updated>
+    </task>
+    <task id="LOCAL-00003" summary="redis1">
+      <created>1489736446007</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1489736446007</updated>
+    </task>
+    <task id="LOCAL-00004" summary="redis1">
+      <created>1489736461679</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1489736461679</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+>>>>>>> origin/redis
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="3607000" />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+=======
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+>>>>>>> origin/redis
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19742814" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -427,9 +462,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修改git忽略文件" />
+<<<<<<< HEAD
     <MESSAGE value="进一步同步数据" />
     <MESSAGE value="redis" />
     <option name="LAST_COMMIT_MESSAGE" value="redis" />
+=======
+    <MESSAGE value="redis" />
+    <MESSAGE value="redis1" />
+    <option name="LAST_COMMIT_MESSAGE" value="redis1" />
+>>>>>>> origin/redis
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -617,8 +658,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="358">
           <caret line="120" column="23" selection-start-line="120" selection-start-column="23" selection-end-line="120" selection-end-column="23" />
+=======
+        <state vertical-scroll-proportion="0.8784722">
+          <caret line="121" column="5" selection-start-line="106" selection-start-column="4" selection-end-line="121" selection-end-column="5" />
+>>>>>>> origin/redis
           <folding />
         </state>
       </provider>
