@@ -65,7 +65,7 @@
         <thead>
         <tr>
             <if condition="($start eq null) OR ($end eq null)">
-                <th class="text-right">所选时段内到期汇总为:</th>
+                <th class="text-right">此时段内到期汇总为:</th>
                 <else/>
                 <th class="text-right">所选时段 : {$start|date='Y-m-d',###} ~ {$end|date='Y-m-d',###} 到期汇总为:</th>
             </if>
@@ -74,7 +74,7 @@
         <tbody>
         <volist name="invest_total1" id="vo">
             <if condition=" $vo.id eq null  ">
-                <td class="text-right" style="color:green;">所选时段内没有到期记录</td>
+                <td class="text-right" style="color:green;">此时段内没有到期记录</td>
                 <else />
                 <td class="text-right" style="color:red;">{$vo.SUM(account)} 元</td>
             </if>

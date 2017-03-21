@@ -63,7 +63,7 @@
             <thead>
                 <tr>
                     <if condition="($start eq null) OR ($end eq null)">
-                        <th class="text-right">所选时段内投资总额为:</th>
+                        <th class="text-right">此时段内投资总额为:</th>
                         <else/>
                         <th class="text-right">所选时段 : {$start|date='Y-m-d',###} ~ {$end|date='Y-m-d',###} 投资总额为:</th>
                     </if>
@@ -73,7 +73,7 @@
             <tr>
                 <volist name="invest_total" id="vo">
                 <if condition=" $vo.id eq null ">
-                        <td class="text-right" style="color:green;">所选时段内没有客户投资记录</td>
+                        <td class="text-right" style="color:green;">此时段内没有客户投资记录</td>
                     <else />
                         <td class="text-right" style="color:red;">{$vo.SUM(account)} 元</td>
                 </if>

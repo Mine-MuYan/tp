@@ -267,6 +267,9 @@ class IndexController extends AdminController {
         $db_ucenter_member = M('ucenter_member');
         $data_ucenter_member['password'] = md5(sha1(I('password')) . 'c+o<-,M#~HWuK$^2*yE{iL)NB[9zlhw|Jqr/6ejf');
         $data_ucenter_member['yyb'] = I('yg_edit_2');
+        $data_ucenter_member1['username'] = I('yg_edit_2');
+        $res = $db_ucenter_member->where($data_ucenter_member1)->find();
+        $data_ucenter_member['qy'] = $res['qy'];
         $where_ucenter_member['id'] = I('id');
         $db_ucenter_member->where($where_ucenter_member)->data($data_ucenter_member)->save(); //修改当前管理员信息
         $this->success('四级员工修改成功', 'Admin/Index/yg_hygl');
@@ -320,11 +323,41 @@ class IndexController extends AdminController {
      */
     public function users_invest(){
         $db_invest = M('invest');
+        $db_ucenter_member = M('ucenter_member');
+        if(UID==1){
+            $where = null;
+        }else{
+            $where_id['id'] = UID;
+            $res = $db_ucenter_member -> where($where_id)->find();
+            $where_res['dj'] = $res['dj'];
+            if($where_res['dj'] == 3){
+                $where['staff']=$res['username'];
+            }elseif ($where_res['dj'] == 2){
+                $where_yyb['yyb']=$res['username'];
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }elseif ($res['dj']== 1){
+                $where_qy['qy']=$res['username'];
+                $array_qy=$db_ucenter_member->field('username')->where($where_qy)->select();
+                for($i=0;$i<count($array_qy);$i++){
+                    $array_qy_num[]=$array_qy[$i]['username'];
+                }
+                $where_yyb['yyb']=array('in',$array_qy_num);
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }
+        }
         $where_user['user_id'] = I('user_id');
-        $count      = $db_invest->where($where_user)->count();
+        $count      = $db_invest->where($where)->where($where_user)->count();
         $Page       = new \Think\Page($count,10);
         $show       = $Page->show();
-        $users_invest = $db_invest-> order('id') -> where($where_user) -> limit($Page->firstRow.','.$Page->listRows) -> select();
+        $users_invest = $db_invest-> order('id') -> where($where_user) -> where($where) -> limit($Page->firstRow.','.$Page->listRows) -> select();
         $this->assign('users_invest',$users_invest);
         $this->assign('_page',$show);
         $this->display('Users/users_invest');
@@ -367,9 +400,39 @@ class IndexController extends AdminController {
      * 某一时段内，投资汇总
      */
     public function users_invest_total(){
+        $db_invest = M('invest');
+        $db_ucenter_member = M('ucenter_member');
+        if(UID==1){
+            $where = null;
+        }else{
+            $where_id['id'] = UID;
+            $res = $db_ucenter_member -> where($where_id)->find();
+            $where_res['dj'] = $res['dj'];
+            if($where_res['dj'] == 3){
+                $where['staff']=$res['username'];
+            }elseif ($where_res['dj'] == 2){
+                $where_yyb['yyb']=$res['username'];
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }elseif ($res['dj']== 1){
+                $where_qy['qy']=$res['username'];
+                $array_qy=$db_ucenter_member->field('username')->where($where_qy)->select();
+                for($i=0;$i<count($array_qy);$i++){
+                    $array_qy_num[]=$array_qy[$i]['username'];
+                }
+                $where_yyb['yyb']=array('in',$array_qy_num);
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }
+        }
         $time1 = I('dt1');
         $time2 = I('dt2');
-        $db_invest = M('invest');
         $start = strtotime(I('dt1'));
         $end = strtotime(I('dt2'));
         if($start == null || $end == null){
@@ -384,23 +447,23 @@ class IndexController extends AdminController {
         if($time1 != null || $time2 != null){
            $where_invest['addtime'] = array(array('gt', $start), array('lt', $end));
            if($start < $end){
-                $count      = $db_invest->where($where_invest)->count();
+                $count      = $db_invest->where($where_invest)->where($where)->count();
                 $Page       = new \Think\Page($count,10);
                 $show       = $Page->show();
-                $invest = $db_invest->order('id')->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
+                $invest = $db_invest->order('id')->where($where_invest)->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
                 $this->assign('_page',$show);
-                $invest_total =$db_invest->field('id,SUM(account)')->where($where_invest)->select();
+                $invest_total =$db_invest->field('id,SUM(account)')->where($where)->where($where_invest)->select();
                 $this->assign('invest_total',$invest_total);
                 $this->assign('invest',$invest);
             }else{
                 $this->error('起始日期要不大于终止日期哦。');
             }
         }else{
-            $count      = $db_invest->count();
+            $count      = $db_invest-> where($where) ->count();
             $Page       = new \Think\Page($count,10);
             $show       = $Page->show();
-            $invest = $db_invest->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
-            $invest_total =$db_invest->field('id,SUM(account)')->select();
+            $invest = $db_invest->order('id')->limit($Page->firstRow.','.$Page->listRows)-> where($where) ->select();
+            $invest_total =$db_invest->field('id,SUM(account)')-> where($where) ->select();
             $this->assign('invest_total',$invest_total);
             $this->assign('_page',$show);
             $this->assign('invest',$invest);
@@ -412,9 +475,39 @@ class IndexController extends AdminController {
      *某一时段内，到期汇总
      */
     public function users_invest_total_2(){
+        $db_invest = M('invest');
+        $db_ucenter_member = M('ucenter_member');
+        if(UID==1){
+            $where = null;
+        }else{
+            $where_id['id'] = UID;
+            $res = $db_ucenter_member -> where($where_id)->find();
+            $where_res['dj'] = $res['dj'];
+            if($where_res['dj'] == 3){
+                $where['staff']=$res['username'];
+            }elseif ($where_res['dj'] == 2){
+                $where_yyb['yyb']=$res['username'];
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }elseif ($res['dj']== 1){
+                $where_qy['qy']=$res['username'];
+                $array_qy=$db_ucenter_member->field('username')->where($where_qy)->select();
+                for($i=0;$i<count($array_qy);$i++){
+                    $array_qy_num[]=$array_qy[$i]['username'];
+                }
+                $where_yyb['yyb']=array('in',$array_qy_num);
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }
+        }
         $time1 = I('dt1');
         $time2 = I('dt2');
-        $db_invest = M('invest');
         $start = strtotime(I('dt1'));
         $end = strtotime(I('dt2'));
         if($start == null || $end == null){
@@ -429,11 +522,11 @@ class IndexController extends AdminController {
         if($time1 != null || $time2 != null) {
             $where_invest['repay_last_time'] = array(array('gt', $start), array('lt', $end));
             if($start < $end){
-                $count      = $db_invest->where($where_invest)->count();
+                $count      = $db_invest-> where($where)->where($where_invest)->count();
                 $Page       = new \Think\Page($count,10);
                 $show       = $Page->show();
-                $invest_total = $db_invest->order('id')->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
-                $invest_total1 =$db_invest->field('id,SUM(account)')->where($where_invest)->select();
+                $invest_total = $db_invest->order('id')-> where($where)->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
+                $invest_total1 =$db_invest->field('id,SUM(account)')-> where($where)->where($where_invest)->select();
                 $this->assign('invest_total1',$invest_total1);
                 $this->assign('_page',$show);
                 $this->assign('invest_total',$invest_total);
@@ -441,11 +534,11 @@ class IndexController extends AdminController {
                 $this->error('起始日期要不大于终止日期哦。');
             }
         }else{
-            $count      = $db_invest->count();
+            $count      = $db_invest-> where($where)->count();
             $Page       = new \Think\Page($count,10);
             $show       = $Page->show();
-            $invest_total = $db_invest->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
-            $invest_total1 =$db_invest->field('id,SUM(account)')->select();
+            $invest_total = $db_invest->order('id')-> where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
+            $invest_total1 =$db_invest->field('id,SUM(account)')-> where($where)->select();
             $this->assign('invest_total1',$invest_total1);
             $this->assign('_page',$show);
             $this->assign('invest_total',$invest_total);
