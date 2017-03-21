@@ -1,0 +1,117 @@
+<extend name="Public/base" />
+
+
+<block name="body">
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>到期汇总</h2>
+    </div>
+
+    <script language="javascript" type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
+    <form action="{:U('Index/users_invest_total_2')}" method="post" id="form1" class="form-horizontal">
+        <div class="text-right">
+            <span>点击选择到期的起、止时间：</span>
+            <input class="text input-small" type="text" onClick="WdatePicker()" name="dt1" placeholder="点击选择时间" value="{$start|date='Y-m-d',###}" style="cursor: pointer;"> -
+            <input class="text input-small" type="text" onClick="WdatePicker()" name="dt2" placeholder="点击选择时间" value="{$end|date='Y-m-d',###}" style="cursor: pointer;">
+            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确定</button>
+        </div>
+
+        <div class="data-table table-striped">
+            <table>
+                <thead>
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                    <th>序号</th>
+                    <th>用户ID</th>
+                    <th>标ID</th>
+                    <th>标名称</th>
+                    <th>投资金额</th>
+                    <th>投资来源</th>
+                    <th>投标订单号</th>
+                    <th>标期限</th>
+                    <th>邀请人</th>
+                    <th>投资时间</th>
+                    <th>借款到期时间</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <volist name="invest_total" id="vo">
+                    <tr>
+                        <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
+                        <td>{$vo.id} </td>
+                        <td>{$vo.user_id} </td>
+                        <td>{$vo.borrow_nid} </td>
+                        <td>{$vo.name} </td>
+                        <td>{$vo.account} </td>
+                        <td>{$vo.sources} </td>
+                        <td>{$vo.tender_id} </td>
+                        <td>{$vo.borrow_period} </td>
+                        <td>{$vo.staff} </td>
+                        <td>{$vo.addtime|date='Y-m-d H:i:s',###} </td>
+                        <td>{$vo.repay_last_time|date='Y-m-d H:i:s',###} </td>
+                    </tr>
+                </volist>
+
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <div class="page">
+        {$_page}
+    </div>
+    <div class="data-table table-striped">
+    <table>
+        <thead>
+        <tr>
+            <if condition="($start eq null) OR ($end eq null)">
+                <th class="text-right">所选时段内到期汇总为:</th>
+                <else/>
+                <th class="text-right">所选时段 : {$start|date='Y-m-d',###} ~ {$end|date='Y-m-d',###} 到期汇总为:</th>
+            </if>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="invest_total1" id="vo">
+            <if condition=" $vo.id eq null  ">
+                <td class="text-right" style="color:green;">所选时段内没有到期记录</td>
+                <else />
+                <td class="text-right" style="color:red;">{$vo.SUM(account)} 元</td>
+            </if>
+
+        </volist>
+        </tbody>
+    </table>
+    </div>
+</block>
+
+<block name="script">
+    <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+
+    <script type="text/javascript">
+        //搜索功能
+        $("#search").click(function(){
+            var url = $(this).attr('url');
+            var query  = $('.search-form').find('input').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+            query = query.replace(/^&/g,'');
+            if( url.indexOf('?')>0 ){
+                url += '&' + query;
+            }else{
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+        //回车搜索
+        $(".search-input").keyup(function(e){
+            if(e.keyCode === 13){
+                $("#search").click();
+                return false;
+            }
+        });
+        //导航高亮
+        //highlight_subnav('{:U('User/hygl')}');
+
+    </script>
+</block>

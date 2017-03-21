@@ -1,13 +1,21 @@
 <extend name="Public/base" />
-<div class="page">
-    {$_page}
-</div>
+
+
 <block name="body">
     <!-- 标题栏 -->
     <div class="main-title">
-        <h2>客户投资记录</h2>
+        <h2>投资汇总</h2>
     </div>
-    <!-- 数据列表 -->
+
+    <script language="javascript" type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
+    <form action="{:U('Index/users_invest_total')}" method="post">
+        <div class="text-right">
+            <span>点击选择投资的起、止时间：</span>
+            <input class="text input-small" type="text" onClick="WdatePicker()" name="dt1"  style="cursor: pointer;" placeholder="点击选择时间" value="{$start|date='Y-m-d',###}"> -
+            <input class="text input-small" type="text" onClick="WdatePicker()" name="dt2" style="cursor: pointer;" placeholder="点击选择时间" value="{$end|date='Y-m-d',###}">
+            <button class="btn submit-btn" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+        </div>
+
     <div class="data-table table-striped">
         <table>
             <thead>
@@ -27,8 +35,7 @@
             </tr>
             </thead>
             <tbody>
-
-            <volist name="users_invest" id="vo">
+            <volist name="invest" id="vo">
                 <tr>
                     <td><input class="ids" type="checkbox" name="id[]" value="{$vo.id}" /></td>
                     <td>{$vo.id} </td>
@@ -36,13 +43,7 @@
                     <td>{$vo.borrow_nid} </td>
                     <td>{$vo.name} </td>
                     <td>{$vo.account} </td>
-                    <!--<td>{$vo.sources} </td>-->
-                    <td>
-                        <if condition="$vo.sources eq 0"> PC
-                            <elseif  condition="$vo.sources eq 1" /> APP
-                                <else /> 微信
-                        </if>
-                    </td>
+                    <td>{$vo.sources} </td>
                     <td>{$vo.tender_id} </td>
                     <td>{$vo.borrow_period} </td>
                     <td>{$vo.staff} </td>
@@ -50,17 +51,42 @@
                     <td>{$vo.repay_last_time|date='Y-m-d H:i:s',###} </td>
                 </tr>
             </volist>
-
             </tbody>
         </table>
     </div>
     <div class="page">
         {$_page}
     </div>
+    </form>
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+                <tr>
+                    <if condition="($start eq null) OR ($end eq null)">
+                        <th class="text-right">所选时段内投资总额为:</th>
+                        <else/>
+                        <th class="text-right">所选时段 : {$start|date='Y-m-d',###} ~ {$end|date='Y-m-d',###} 投资总额为:</th>
+                    </if>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <volist name="invest_total" id="vo">
+                <if condition=" $vo.id eq null ">
+                        <td class="text-right" style="color:green;">所选时段内没有客户投资记录</td>
+                    <else />
+                        <td class="text-right" style="color:red;">{$vo.SUM(account)} 元</td>
+                </if>
+                </volist>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </block>
 
 <block name="script">
     <script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
 
     <script type="text/javascript">
         //搜索功能
@@ -85,5 +111,6 @@
         });
         //导航高亮
         //highlight_subnav('{:U('User/hygl')}');
+
     </script>
 </block>

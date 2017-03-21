@@ -283,16 +283,16 @@ class IndexController extends AdminController {
             $db_ucenter_member = M('ucenter_member');
             $where_id['id']=UID;
             $res=$db_ucenter_member->where($where_id)->find();
-            if($res['dj'] ==3 ){
+            if($res['dj'] == 3 ){
                 $where['staff']=$res['username'];
-            }elseif($res['dj']==2){
+            }elseif($res['dj']== 2){
                 $where_yyb['yyb']=$res['username'];
                 $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
                 for($i=0;$i<count($array);$i++){
                     $array_nul[]=$array[$i]['username'];
                 }
                 $where['staff']=array('in',$array_nul);
-            }elseif ($res['dj']==1){
+            }elseif ($res['dj']== 1){
                 $where_qy['qy']=$res['username'];
                 $array_qy=$db_ucenter_member->field('username')->where($where_qy)->select();
                 for($i=0;$i<count($array_qy);$i++){
@@ -324,7 +324,7 @@ class IndexController extends AdminController {
         $count      = $db_invest->where($where_user)->count();
         $Page       = new \Think\Page($count,10);
         $show       = $Page->show();
-        $users_invest = $db_invest-> order('user_id') -> where($where_user) -> limit($Page->firstRow.','.$Page->listRows) -> select();
+        $users_invest = $db_invest-> order('id') -> where($where_user) -> limit($Page->firstRow.','.$Page->listRows) -> select();
         $this->assign('users_invest',$users_invest);
         $this->assign('_page',$show);
         $this->display('Users/users_invest');
@@ -341,25 +341,124 @@ class IndexController extends AdminController {
         $this->display('Users/users_invest_edit');
     }
 
+    /**
+     *编辑客户邀请人动作
+     */
     public function users_invest_editing(){
         $db_user = M('user');
-        $where_user[user_id]= I('user_id');
+        $where_user['user_id']= I('user_id');
         $data_user['staff'] = I('staff');
-        $db_user->where($where_user)->data($data_user)->save();
-        $this->success('客户的邀请人修改成功', 'Admin/Index/users');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "http://testwww.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=editstaff&user_id=146&staff=333");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        $output = curl_exec($ch);
+        $json=json_decode($output,true);
+        curl_close($ch);
+        if ($json['code'] == 0){
+            $db_user->where($where_user)->data($data_user)->save();
+            $this->success('客户的邀请人修改成功', 'Admin/Index/users');
+        }else{
+            $this->error($json['msg']);
+        }
     }
-
-
 
     /**
-     * 客户投资汇总
+     * 某一时段内，投资汇总
      */
     public function users_invest_total(){
+        $time1 = I('dt1');
+        $time2 = I('dt2');
+        $db_invest = M('invest');
+        $start = strtotime(I('dt1'));
+        $end = strtotime(I('dt2'));
+        if($start == null || $end == null){
+            $start = '';
+            $end = '';
+        }else{
+            $start = strtotime(I('dt1'));
+            $end = strtotime(I('dt2'));
+        }
+        $this->assign('start',$start);
+        $this->assign('end',$end);
+        if($time1 != null || $time2 != null){
+           $where_invest['addtime'] = array(array('gt', $start), array('lt', $end));
+           if($start < $end){
+                $count      = $db_invest->where($where_invest)->count();
+                $Page       = new \Think\Page($count,10);
+                $show       = $Page->show();
+                $invest = $db_invest->order('id')->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
+                $this->assign('_page',$show);
+                $invest_total =$db_invest->field('id,SUM(account)')->where($where_invest)->select();
+                $this->assign('invest_total',$invest_total);
+                $this->assign('invest',$invest);
+            }else{
+                $this->error('起始日期要不大于终止日期哦。');
+            }
+        }else{
+            $count      = $db_invest->count();
+            $Page       = new \Think\Page($count,10);
+            $show       = $Page->show();
+            $invest = $db_invest->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+            $invest_total =$db_invest->field('id,SUM(account)')->select();
+            $this->assign('invest_total',$invest_total);
+            $this->assign('_page',$show);
+            $this->assign('invest',$invest);
+        }
+        $this->display('Users/users_invest_total');
+    }
 
+    /**
+     *某一时段内，到期汇总
+     */
+    public function users_invest_total_2(){
+        $time1 = I('dt1');
+        $time2 = I('dt2');
+        $db_invest = M('invest');
+        $start = strtotime(I('dt1'));
+        $end = strtotime(I('dt2'));
+        if($start == null || $end == null){
+            $start = '';
+            $end = '';
+        }else{
+            $start = strtotime(I('dt1'));
+            $end = strtotime(I('dt2'));
+        }
+        $this->assign('start',$start);
+        $this->assign('end',$end);
+        if($time1 != null || $time2 != null) {
+            $where_invest['repay_last_time'] = array(array('gt', $start), array('lt', $end));
+            if($start < $end){
+                $count      = $db_invest->where($where_invest)->count();
+                $Page       = new \Think\Page($count,10);
+                $show       = $Page->show();
+                $invest_total = $db_invest->order('id')->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
+                $invest_total1 =$db_invest->field('id,SUM(account)')->where($where_invest)->select();
+                $this->assign('invest_total1',$invest_total1);
+                $this->assign('_page',$show);
+                $this->assign('invest_total',$invest_total);
+            }else{
+                $this->error('起始日期要不大于终止日期哦。');
+            }
+        }else{
+            $count      = $db_invest->count();
+            $Page       = new \Think\Page($count,10);
+            $show       = $Page->show();
+            $invest_total = $db_invest->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+            $invest_total1 =$db_invest->field('id,SUM(account)')->select();
+            $this->assign('invest_total1',$invest_total1);
+            $this->assign('_page',$show);
+            $this->assign('invest_total',$invest_total);
+        }
+        $this->display('Users/users_invest_total_2');
     }
 
 
 
+//  未完成
+//    1.users_invest_total() 和 users_invest_total_2()  在选择日期后，点击下面页数后，显示空白页面
+//     2. 不同的管理员登录，可以查询任意一天的投资汇总和到期汇总
+//
 
 
 
