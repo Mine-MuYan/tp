@@ -449,12 +449,16 @@ class IndexController extends AdminController {
            if($start < $end){
                 $count      = $db_invest->where($where_invest)->where($where)->count();
                 $Page       = new \Think\Page($count,10);
+                foreach($_POST as $key=>$val) {
+                    $Page->parameter[$key]   =   urlencode($val);
+                }
                 $show       = $Page->show();
                 $invest = $db_invest->order('id')->where($where_invest)->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
                 $this->assign('_page',$show);
                 $invest_total =$db_invest->field('id,SUM(account)')->where($where)->where($where_invest)->select();
                 $this->assign('invest_total',$invest_total);
                 $this->assign('invest',$invest);
+
             }else{
                 $this->error('起始日期要不大于终止日期哦。');
             }
@@ -524,6 +528,9 @@ class IndexController extends AdminController {
             if($start < $end){
                 $count      = $db_invest-> where($where)->where($where_invest)->count();
                 $Page       = new \Think\Page($count,10);
+                foreach($_POST as $key=>$val) {
+                    $Page->parameter[$key]   =   urlencode($val);
+                }
                 $show       = $Page->show();
                 $invest_total = $db_invest->order('id')-> where($where)->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
                 $invest_total1 =$db_invest->field('id,SUM(account)')-> where($where)->where($where_invest)->select();
@@ -545,16 +552,5 @@ class IndexController extends AdminController {
         }
         $this->display('Users/users_invest_total_2');
     }
-
-
-
-//  未完成
-//    1.users_invest_total() 和 users_invest_total_2()  在选择日期后，点击下面页数后，显示空白页面
-//     2. 不同的管理员登录，可以查询任意一天的投资汇总和到期汇总
-//
-
-
-
-
-
+    
 }

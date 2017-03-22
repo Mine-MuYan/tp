@@ -1,6 +1,5 @@
 <extend name="Public/base" />
 
-
 <block name="body">
     <!-- 标题栏 -->
     <div class="main-title">
@@ -8,7 +7,7 @@
     </div>
 
     <script language="javascript" type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
-    <form action="{:U('Index/users_invest_total')}" method="post">
+    <form action="{:U('Index/users_invest_total')}" method="POST" id="form">
         <div class="text-right">
             <span>点击选择投资的起、止时间：</span>
             <input class="text input-small" type="text" onClick="WdatePicker()" name="dt1"  style="cursor: pointer;" placeholder="点击选择时间" value="{$start|date='Y-m-d',###}"> -
@@ -54,10 +53,10 @@
             </tbody>
         </table>
     </div>
+    </form>
     <div class="page">
         {$_page}
     </div>
-    </form>
     <div class="data-table table-striped">
         <table>
             <thead>
