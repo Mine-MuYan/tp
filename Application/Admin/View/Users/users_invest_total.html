@@ -5,7 +5,6 @@
     <div class="main-title">
         <h2>投资汇总</h2>
     </div>
-
     <script language="javascript" type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
     <form action="{:U('Index/users_invest_total')}" method="POST" id="form">
         <div class="text-right">
@@ -70,13 +69,11 @@
             </thead>
             <tbody>
             <tr>
-                <volist name="invest_total" id="vo">
-                <if condition=" $vo.id eq null ">
+                <if condition="$invest_total eq null ">
                         <td class="text-right" style="color:green;">此时段内没有客户投资记录</td>
                     <else />
-                        <td class="text-right" style="color:red;">{$vo.SUM(account)} 元</td>
+                        <td class="text-right" style="color:red;">{$invest_total} 元</td>
                 </if>
-                </volist>
             </tr>
             </tbody>
         </table>

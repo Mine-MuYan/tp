@@ -309,10 +309,18 @@ class IndexController extends AdminController {
                 $where['staff']=array('in',$array_nul);
             }
         }
-        $count      = $db_user->where($where)->count();
+        if($where == null){
+            $count      = $db_user->count();
+        }else{
+            $count      = $db_user->where($where)->count();
+        }
         $Page       = new \Think\Page($count,10);
         $show       = $Page->show();
-        $user = $db_user-> order('user_id') ->where($where)-> limit($Page->firstRow.','.$Page->listRows) -> select();
+        if($where == null){
+            $user = $db_user-> order('user_id') -> limit($Page->firstRow.','.$Page->listRows) -> select();
+        }else{
+            $user = $db_user-> order('user_id') ->where($where)-> limit($Page->firstRow.','.$Page->listRows) -> select();
+        }
         $this->assign('user',$user);
         $this->assign('_page',$show);
         $this->display('Users/users');
@@ -354,10 +362,18 @@ class IndexController extends AdminController {
             }
         }
         $where_user['user_id'] = I('user_id');
-        $count      = $db_invest->where($where)->where($where_user)->count();
+        if($where == null){
+            $count      = $db_invest->where($where_user)->count();
+        }else{
+            $count      = $db_invest->where($where)->where($where_user)->count();
+        }
         $Page       = new \Think\Page($count,10);
         $show       = $Page->show();
-        $users_invest = $db_invest-> order('id') -> where($where_user) -> where($where) -> limit($Page->firstRow.','.$Page->listRows) -> select();
+        if($where == null){
+            $users_invest = $db_invest-> order('id') -> where($where_user) ->limit($Page->firstRow.','.$Page->listRows) -> select();
+        }else{
+            $users_invest = $db_invest-> order('id') -> where($where_user) -> where($where) -> limit($Page->firstRow.','.$Page->listRows) -> select();
+        }
         $this->assign('users_invest',$users_invest);
         $this->assign('_page',$show);
         $this->display('Users/users_invest');
@@ -447,31 +463,34 @@ class IndexController extends AdminController {
         if($time1 != null || $time2 != null){
            $where_invest['addtime'] = array(array('gt', $start), array('lt', $end));
            if($start < $end){
-                $count      = $db_invest->where($where_invest)->where($where)->count();
+                if($where == null) {
+                   $count = $db_invest->where($where_invest)->count();
+                }else{
+                   $count = $db_invest->where($where_invest)->where($where)->count();
+                }
                 $Page       = new \Think\Page($count,10);
                 foreach($_POST as $key=>$val) {
                     $Page->parameter[$key]   =   urlencode($val);
                 }
                 $show       = $Page->show();
-                $invest = $db_invest->order('id')->where($where_invest)->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
+                if($where == null){
+                    $invest = $db_invest->order('id')->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
+                }else{
+                    $invest = $db_invest->order('id')->where($where_invest)->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
+                }
+                if($where == null) {
+                   $invest_total = $db_invest->where($where_invest)->sum('account');
+                }else{
+                   $invest_total = $db_invest->where($where_invest)->where($where)->sum('account');
+                }
                 $this->assign('_page',$show);
-                $invest_total =$db_invest->field('id,SUM(account)')->where($where)->where($where_invest)->select();
-                $this->assign('invest_total',$invest_total);
                 $this->assign('invest',$invest);
+                $this->assign('invest_total',$invest_total);
 
             }else{
                 $this->error('起始日期要不大于终止日期哦。');
             }
-        }else{
-            $count      = $db_invest-> where($where) ->count();
-            $Page       = new \Think\Page($count,10);
-            $show       = $Page->show();
-            $invest = $db_invest->order('id')->limit($Page->firstRow.','.$Page->listRows)-> where($where) ->select();
-            $invest_total =$db_invest->field('id,SUM(account)')-> where($where) ->select();
-            $this->assign('invest_total',$invest_total);
-            $this->assign('_page',$show);
-            $this->assign('invest',$invest);
-        }
+        }else{}
         $this->display('Users/users_invest_total');
     }
 
@@ -526,30 +545,33 @@ class IndexController extends AdminController {
         if($time1 != null || $time2 != null) {
             $where_invest['repay_last_time'] = array(array('gt', $start), array('lt', $end));
             if($start < $end){
-                $count      = $db_invest-> where($where)->where($where_invest)->count();
+                if($where == null){
+                    $count      = $db_invest->where($where_invest)->count();
+                }else{
+                    $count      = $db_invest-> where($where)->where($where_invest)->count();
+                }
                 $Page       = new \Think\Page($count,10);
                 foreach($_POST as $key=>$val) {
                     $Page->parameter[$key]   =   urlencode($val);
                 }
                 $show       = $Page->show();
-                $invest_total = $db_invest->order('id')-> where($where)->where($where_invest)->limit($Page->firstRow.','.$Page->listRows)->select();
-                $invest_total1 =$db_invest->field('id,SUM(account)')-> where($where)->where($where_invest)->select();
-                $this->assign('invest_total1',$invest_total1);
-                $this->assign('_page',$show);
+                if($where == null) {
+                    $invest_total = $db_invest->order('id')->where($where_invest)->limit($Page->firstRow . ',' . $Page->listRows)->select();
+                }else{
+                    $invest_total = $db_invest->order('id')->where($where)->where($where_invest)->limit($Page->firstRow . ',' . $Page->listRows)->select();
+                }
+                if($where == null) {
+                    $invest_total1 = $db_invest->where($where_invest)->sum('account');
+                }else{
+                    $invest_total1 = $db_invest->where($where_invest)->where($where)->sum('account');
+                }
                 $this->assign('invest_total',$invest_total);
+                $this->assign('_page',$show);
+                $this->assign('invest_total1',$invest_total1);
             }else{
                 $this->error('起始日期要不大于终止日期哦。');
             }
-        }else{
-            $count      = $db_invest-> where($where)->count();
-            $Page       = new \Think\Page($count,10);
-            $show       = $Page->show();
-            $invest_total = $db_invest->order('id')-> where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
-            $invest_total1 =$db_invest->field('id,SUM(account)')-> where($where)->select();
-            $this->assign('invest_total1',$invest_total1);
-            $this->assign('_page',$show);
-            $this->assign('invest_total',$invest_total);
-        }
+        }else{}
         $this->display('Users/users_invest_total_2');
     }
     

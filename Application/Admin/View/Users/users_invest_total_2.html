@@ -72,14 +72,11 @@
         </tr>
         </thead>
         <tbody>
-        <volist name="invest_total1" id="vo">
-            <if condition=" $vo.id eq null  ">
+            <if condition="$invest_total1 eq null  ">
                 <td class="text-right" style="color:green;">此时段内没有到期记录</td>
                 <else />
-                <td class="text-right" style="color:red;">{$vo.SUM(account)} 元</td>
+                <td class="text-right" style="color:red;">{$invest_total1} 元</td>
             </if>
-
-        </volist>
         </tbody>
     </table>
     </div>
