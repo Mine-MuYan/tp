@@ -968,5 +968,4 @@ function v($str){
     echo '<div style="border: 1px solid bisque;color:green;background-color: bisque "><pre>';
     var_dump($str);
     echo '</pre></div>';
-
 }

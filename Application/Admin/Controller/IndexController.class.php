@@ -12,13 +12,13 @@ use User\Api\UserApi as UserApi;
 
 /**
  * 后台首页控制器
- * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+ * @developer 刘乾隆  <mine_muyan@qq.com>
  */
 class IndexController extends AdminController {
 
     /**
      * 后台首页
-     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     * @developer 刘乾隆  <mine_muyan@qq.com>
      */
     public function index(){
         if(UID){
@@ -50,14 +50,56 @@ class IndexController extends AdminController {
     public function yyb_hygl(){
         $db_ucenter_member = M('ucenter_member');
         $where_ucenter_memeber['dj'] = 2;
-        $count      = $db_ucenter_member->where($where_ucenter_memeber)->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
-        $show       = $Page->show();// 分页显示输出
-        $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+        if(UID==1){
+            $where = null;
+            $count      = $db_ucenter_member->where($where_ucenter_memeber)->count();
+            $Page       = new \Think\Page($count,10);
+            $show       = $Page->show();
+            $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+        }else{
+            $db_ucenter_member = M('ucenter_member');
+            $where_id['id']=UID;
+            $res=$db_ucenter_member->where($where_id)->find();
+            if($res['dj'] == 3 ){
+                $where['staff']=$res['username'];
+            }elseif($res['dj']== 2){
+                $where_yyb['yyb']=$res['username'];
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }elseif ($res['dj']== 1){
+                $where_qy['qy']=$res['username'];
+                $array_qy=$db_ucenter_member->field('username')->where($where_qy)->select();
+                for($i=0;$i<count($array_qy);$i++){
+                    $array_qy_num[]=$array_qy[$i]['username'];
+                }
+                $where_yyb['yyb']=array('in',$array_qy_num);
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }
+            $where_ucenter_memeber['qy'] = $where_qy['qy'];
+            if($where == null){
+                $count      = $db_ucenter_member->where($where_ucenter_memeber)->count();
+            }else{
+                $count      = $db_ucenter_member->where($where_ucenter_memeber)->where($where)->count();
+            }
+            $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+            $show       = $Page->show();// 分页显示输出
+            if($where == null){
+                $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+            }else{
+                $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->where($where)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+            }
+        }
         $this->assign('list_hygl',$list_hygl);
-        $this->assign('_page',$show);// 赋值分页输出
+        $this->assign('_page',$show);
         $this->display();
-    }
+        }
 
     /**
      * 显示四级员工管理账号
@@ -65,15 +107,56 @@ class IndexController extends AdminController {
     public function yg_hygl(){
         $db_ucenter_member = M('ucenter_member');
         $where_ucenter_memeber['dj'] = 3;
-        $count      = $db_ucenter_member->where($where_ucenter_memeber)->count();// 查询满足要求的总记录数
-        $Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
-        $show       = $Page->show();// 分页显示输出
-        $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+        if(UID==1){
+            $where = null;
+            $count      = $db_ucenter_member->where($where_ucenter_memeber)->count();
+            $Page       = new \Think\Page($count,10);
+            $show       = $Page->show();
+            $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+        }else{
+            $db_ucenter_member = M('ucenter_member');
+            $where_id['id']=UID;
+            $res=$db_ucenter_member->where($where_id)->find();
+            if($res['dj'] == 3 ){
+                $where['staff']=$res['username'];
+            }elseif($res['dj']== 2){
+                $where_yyb['yyb']=$res['username'];
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }elseif ($res['dj']== 1){
+                $where_qy['qy']=$res['username'];
+                $array_qy=$db_ucenter_member->field('username')->where($where_qy)->select();
+                for($i=0;$i<count($array_qy);$i++){
+                    $array_qy_num[]=$array_qy[$i]['username'];
+                }
+                $where_yyb['yyb']=array('in',$array_qy_num);
+                $array=$db_ucenter_member->field('username')->where($where_yyb)->select();
+                for($i=0;$i<count($array);$i++){
+                    $array_nul[]=$array[$i]['username'];
+                }
+                $where['staff']=array('in',$array_nul);
+            }
+            $where_ucenter_memeber['yyb'] = $where_yyb['yyb'];
+            if($where == null){
+                $count      = $db_ucenter_member->where($where_ucenter_memeber)->count();
+            }else{
+                $count      = $db_ucenter_member->where($where_ucenter_memeber)->where($where)->count();
+            }
+            $Page       = new \Think\Page($count,10);
+            $show       = $Page->show();
+            if($where == null){
+                $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+            }else{
+                $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->where($where)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
+            }
+        }
         $this->assign('list_hygl',$list_hygl);
         $this->assign('_page',$show);// 赋值分页输出
         $this->display();
     }
-
 
 
     /**
@@ -146,7 +229,6 @@ class IndexController extends AdminController {
         }
     }
 
-
     /**
      * 添加四级员工管理
      */
@@ -205,7 +287,6 @@ class IndexController extends AdminController {
         $where_ucenter_member['id'] = I('id');
         $db_ucenter_member->where($where_ucenter_member)->data($data_ucenter_member)->save();
         $this->success('二级区域修改成功', 'Admin/Index/qy_hygl');
-
     }
 
     /**
@@ -216,7 +297,6 @@ class IndexController extends AdminController {
         $where_ucenter_member['id'] = I('id');
         $a =$db_ucenter_member->where($where_ucenter_member)->limit('1')->delete();
         $this->success('管理员删除成功。', 'Admin/Index/qy_hygl');
-
     }
 
     /**
@@ -244,7 +324,6 @@ class IndexController extends AdminController {
         $db_ucenter_member->where($where_ucenter_member)->data($data_ucenter_member)->save(); //修改当前管理员信息
         $this->success('三级营业部修改成功', 'Admin/Index/yyb_hygl');
     }
-
 
     /**
      * 四级员工编辑的展示页面
@@ -398,7 +477,7 @@ class IndexController extends AdminController {
         $where_user['user_id']= I('user_id');
         $data_user['staff'] = I('staff');
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://testwww.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=editstaff&user_id=146&staff=333");
+        curl_setopt($ch, CURLOPT_URL, "http://testwww.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=editstaff&user_id=I('user_id')&staff=I('staff')");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         $output = curl_exec($ch);
@@ -574,5 +653,4 @@ class IndexController extends AdminController {
         }else{}
         $this->display('Users/users_invest_total_2');
     }
-    
 }
