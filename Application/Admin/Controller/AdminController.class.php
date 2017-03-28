@@ -93,6 +93,13 @@ class AdminController extends Controller {
     protected function checkDynamic(){
         if(IS_ROOT){
             return true;//管理员允许访问任何页面
+        }else{
+            $db_ucenter_member = M('ucenter_member');
+            $where['id'] = UID;
+            $user = $db_ucenter_member->where($where)->find();
+            if($user['dj'] == 1){
+                return true;
+            }
         }
         return null;//不明,需checkRule
     }
