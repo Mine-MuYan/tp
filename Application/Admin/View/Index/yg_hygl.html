@@ -28,9 +28,17 @@
 			<td>{$vo.yyb} </td>
 			<td>{$vo.email} </td>
 			<td>
-				<a href="{:U('yg_edit',array('id'=>$vo['id']))}"><span>编辑</span></a>  |
-				<a href="{:U('hy_del',array('id'=>$vo['id']))}"><span>删除</span></a>
-
+				<if condition="$dj['dj'] eq 2">
+					无编辑权限
+				<else />
+					<a href="{:U('yg_edit',array('id'=>$vo['id']))}"><span>编辑</span></a>
+				</if>
+					|
+				<if condition="$dj['dj'] egt 1">
+					无删除权限
+					<else />
+					<a href="{:U('hy_del',array('id'=>$vo['id']))}"><span>删除</span></a>
+				</if>
 			</td>
 		</tr>
 		</volist>

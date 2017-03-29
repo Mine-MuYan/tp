@@ -13,6 +13,7 @@ use User\Api\UserApi as UserApi;
 /**
  * 后台首页控制器
  * @developer 刘乾隆  <mine_muyan@qq.com>
+ *
  */
 class IndexController extends AdminController {
 
@@ -41,6 +42,7 @@ class IndexController extends AdminController {
         $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
         $this->assign('list_hygl',$list_hygl);
         $this->assign('_page',$show);// 赋值分页输出
+        $this->meta_title = '二级-管理';
         $this->display();
     }
 
@@ -98,6 +100,7 @@ class IndexController extends AdminController {
         }
         $this->assign('list_hygl',$list_hygl);
         $this->assign('_page',$show);
+        $this->meta_title = '三级-管理';
         $this->display();
         }
 
@@ -152,9 +155,15 @@ class IndexController extends AdminController {
             }else{
                 $list_hygl = $db_ucenter_member->where($where_ucenter_memeber)->where($where)->order('id')->limit($Page->firstRow.','.$Page->listRows)->select();
             }
+            $where_dj['id'] =UID;
+            $dj=$db_ucenter_member->where($where_dj)->find();
+            if($dj['dj'] >= 1){
+                $this->assign('dj',$dj);
+            }
         }
         $this->assign('list_hygl',$list_hygl);
-        $this->assign('_page',$show);// 赋值分页输出
+        $this->assign('_page',$show);
+        $this->meta_title = '四级-管理';
         $this->display();
     }
 
@@ -163,6 +172,7 @@ class IndexController extends AdminController {
      * 添加二级区域管理
      */
     public function addqy(){
+        $this->meta_title = '二级-添加';
         $this->display();
     }
 
@@ -199,6 +209,7 @@ class IndexController extends AdminController {
         $where_ucenter_member['dj']=1 ;
         $list_qy=$db_ucenter_member -> where($where_ucenter_member) -> select();
         $this->assign('list_qy',$list_qy);
+        $this->meta_title = '三级-添加';
         $this->display();
     }
 
@@ -237,6 +248,7 @@ class IndexController extends AdminController {
         $where_ucenter_member['dj']=2 ;
         $list_yyb=$db_ucenter_member -> where($where_ucenter_member) -> select();
         $this->assign('list_yyb',$list_yyb);
+        $this->meta_title = '四级-添加';
         $this->display();
     }
 
@@ -275,6 +287,7 @@ class IndexController extends AdminController {
         $where_ucenter_member['id']=I('id');
         $qy_edit=$db_ucenter_member->where($where_ucenter_member)->find();
         $this->assign('qy_edit',$qy_edit);
+        $this->meta_title = '二级-编辑';
         $this->display('Edit/qy_edit');
     }
 
@@ -295,8 +308,15 @@ class IndexController extends AdminController {
     public function hy_del(){
         $db_ucenter_member = M('ucenter_member');
         $where_ucenter_member['id'] = I('id');
-        $a =$db_ucenter_member->where($where_ucenter_member)->limit('1')->delete();
-        $this->success('管理员删除成功。', 'Admin/Index/qy_hygl');
+        $b =$db_ucenter_member->where($where_ucenter_member)->find();
+        $where_iqy['yyb'] = $b['username'];
+        $list =  $db_ucenter_member->where($where_iqy) ->select();
+        if($list == null){
+            $a =$db_ucenter_member->where($where_ucenter_member)->limit('1')->delete();
+            $this->success('管理员删除成功', 'Admin/Index/yyb_hygl');
+        }else{
+            $this->error("此管理员账号下还有其他管理员，不可删除!");
+        }
     }
 
     /**
@@ -310,6 +330,7 @@ class IndexController extends AdminController {
         $yyb_edit_2 = $db_ucenter_member->where($where_ucenter_member1)->select();
         $this->assign('yyb_edit',$yyb_edit);
         $this->assign('yyb_edit_2',$yyb_edit_2);
+        $this->meta_title = '三级-编辑';
         $this->display('Edit/yyb_edit');
     }
 
@@ -336,6 +357,7 @@ class IndexController extends AdminController {
         $yg_edit_2 = $db_ucenter_member->where($where_ucenter_member1)->select();
         $this->assign('yg_edit',$yg_edit);
         $this->assign('yg_edit_2',$yg_edit_2);
+        $this->meta_title = '四级-编辑';
         $this->display('Edit/yg_edit');
     }
 
@@ -402,6 +424,7 @@ class IndexController extends AdminController {
         }
         $this->assign('user',$user);
         $this->assign('_page',$show);
+        $this->meta_title = '客户信息展示表';
         $this->display('Users/users');
     }
 
@@ -455,6 +478,7 @@ class IndexController extends AdminController {
         }
         $this->assign('users_invest',$users_invest);
         $this->assign('_page',$show);
+        $this->meta_title = '客户投资记录表';
         $this->display('Users/users_invest');
     }
 
@@ -466,6 +490,7 @@ class IndexController extends AdminController {
         $where_user['user_id'] = I('user_id');
         $user =$db_user->where($where_user)->find();
         $this->assign('user',$user);
+        $this->meta_title = '编辑客户邀请人';
         $this->display('Users/users_invest_edit');
     }
 
@@ -570,6 +595,7 @@ class IndexController extends AdminController {
                 $this->error('起始日期要不大于终止日期哦。');
             }
         }else{}
+        $this->meta_title = '投资汇总';
         $this->display('Users/users_invest_total');
     }
 
@@ -651,6 +677,7 @@ class IndexController extends AdminController {
                 $this->error('起始日期要不大于终止日期哦。');
             }
         }else{}
+        $this->meta_title = '到期汇总';
         $this->display('Users/users_invest_total_2');
     }
 }
