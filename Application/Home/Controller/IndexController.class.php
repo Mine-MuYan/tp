@@ -25,9 +25,12 @@ class IndexController extends HomeController {
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表
         $this->assign('page',D('Document')->page);//分页
-
                  
-        $this->display();
+        //$this->display();
+        //header("location: /Admin/Index/index");
+        //$this->success('你好', '/Admin/Index/index');
+        redirect('/Admin/Index/index');
+
     }
 
 
