@@ -17,4 +17,3 @@ define('UC_API_TYPE', 'Model'); //可选值 Model / Service
 define('UC_AUTH_KEY', 'c+o<-,M#~HWuK$^2*yE{iL)NB[9zlhw|Jqr/6ejf'); //加密KEY
 define('UC_DB_DSN', 'mysqli://root:123123@127.0.0.1:3306/tp'); // 数据库连接，使用Model方式调用API必须配置此项
 define('UC_TABLE_PREFIX', 'tp_'); // 数据表前缀，使用Model方式调用API必须配置此项
-p();
