@@ -21,16 +21,10 @@ class IndexController extends HomeController {
 
         $category = D('Category')->getTree();
         $lists    = D('Document')->lists(null);
-
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表
         $this->assign('page',D('Document')->page);//分页
-                 
-        //$this->display();
-        //header("location: /Admin/Index/index");
-        //$this->success('你好', '/Admin/Index/index');
         redirect('/Admin/Index/index');
-
     }
 
 
@@ -39,7 +33,8 @@ class IndexController extends HomeController {
         $db_invest=M('invest');
         //获取数据
         $redis = new \Redis();
-        $redis->connect('60.173.251.191',6379);
+        $R=$redis->connect('r-bp1d5a1a427a0ce4.redis.rds.aliyuncs.com',6379);
+        $redis->auth('Pl2lEnsU62fXmNqHYNpb');
         vendor('DES3.DES3');
         $DES3 = new \DES3();
         $zs=$redis->LLEN('channelAaaTender');
@@ -52,10 +47,12 @@ class IndexController extends HomeController {
             $data_invest['sources']='';
             $data_invest['tender_id']=$one['tender_id'];
             $data_invest['borrow_period']=$one['borrow_period'];
+            $data_invest['borrow_nid']=$one['borrow_nid'];
             $data_invest['name']=$one['borrow_name'];
             $data_invest['staff']=$one['staff'];
             $data_invest['addtime']=$one['addtime'];
-            $data_invest['repay_last_time']='';
+            $data_invest['repay_last_time']=$one['repay_last_time'];
+            $data_invest['recover_account_all']=$one['recover_account_all'];
             $res=$db_invest->add( $data_invest);
         }
         echo 'success';
@@ -66,7 +63,8 @@ class IndexController extends HomeController {
         $db_user=M('user');
         //获取数据
         $redis = new \Redis();
-        $redis->connect('60.173.251.191',6379);
+        $redis->connect('r-bp1d5a1a427a0ce4.redis.rds.aliyuncs.com',6379);
+        $redis->auth('Pl2lEnsU62fXmNqHYNpb');
         vendor('DES3.DES3');
         $DES3 = new \DES3();
         $zs=$redis->LLEN('channelAaaReginfo');
@@ -92,7 +90,8 @@ class IndexController extends HomeController {
         $db_invest=M('invest');
         //获取数据
         $redis = new \Redis();
-        $redis->connect('60.173.251.191',6379);
+        $redis->connect('r-bp1d5a1a427a0ce4.redis.rds.aliyuncs.com',6379);
+        $redis->auth('Pl2lEnsU62fXmNqHYNpb');
         vendor('DES3.DES3');
         $DES3 = new \DES3();
         $zs=$redis->LLEN('channelAaaReverify');
@@ -110,7 +109,7 @@ class IndexController extends HomeController {
     //余额数据对整
     public function saveye(){
         $db_invest=M('user');
-        $html = file_get_contents('http://testwww.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=getUserAccout');
+        $html = file_get_contents('http://www.ronghedai.com/?user&q=channel_set&channel=clkj&action=sendInfoAll&function=getUserAccout');
         vendor('DES3.DES3');
         $DES3 = new \DES3();
         $one=$DES3->decrypt($html);

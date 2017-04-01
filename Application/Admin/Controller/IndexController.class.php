@@ -502,7 +502,7 @@ class IndexController extends AdminController {
         $where_user['user_id']= I('user_id');
         $data_user['staff'] = I('staff');
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://testwww.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=editstaff&user_id=I('user_id')&staff=I('staff')");
+        curl_setopt($ch, CURLOPT_URL, "http://www.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=editstaff&user_id=I('user_id')&staff=I('staff')");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         $output = curl_exec($ch);
