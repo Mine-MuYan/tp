@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2452a0a5-6377-4920-b82e-356bdfd9ddb1" name="Default" comment="项目完成！">
+    <list default="true" id="2452a0a5-6377-4920-b82e-356bdfd9ddb1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -55,8 +55,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            <state relative-caret-position="17">
+              <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -544,7 +544,7 @@
       <workItem from="1490866737108" duration="6000" />
       <workItem from="1490921239521" duration="6326000" />
       <workItem from="1491007201484" duration="3508000" />
-      <workItem from="1491010911927" duration="220000" />
+      <workItem from="1491010911927" duration="443000" />
     </task>
     <task id="LOCAL-00001" summary="接近尾声">
       <created>1490079980841</created>
@@ -616,11 +616,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491010963422</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="项目完成-优化GitHub文件列表">
+      <created>1491011159187</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1491011159187</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112714000" />
+    <option name="totallyTimeSpent" value="112937000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -685,7 +692,8 @@
     <MESSAGE value="新功能开发完成，待测试..." />
     <MESSAGE value="修改默认首页为后台页面" />
     <MESSAGE value="项目完成！" />
-    <option name="LAST_COMMIT_MESSAGE" value="项目完成！" />
+    <MESSAGE value="项目完成-优化GitHub文件列表" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目完成-优化GitHub文件列表" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -970,8 +978,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="17">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
           <folding />
         </state>
       </provider>
