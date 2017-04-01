@@ -1,4 +1,6 @@
-/.idea/
 /.git/
 /Runtime/
-/.gitignore
+/.idea/
+/install.php
+/license.txt
+/readme.html
