@@ -502,12 +502,12 @@ class IndexController extends AdminController {
         $where_user['user_id']= I('user_id');
         $data_user['staff'] = I('staff');
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://www.ronghedai.com/?user&q=channel_set&channel=aaa&action=sendInfoAll&function=editstaff&user_id=I('user_id')&staff=I('staff')");
+        curl_setopt($ch, CURLOPT_URL, "http://zhaoweijian.ronghedai.com/?user&q=channel_set&channel=clkj&action=sendInfoAll&function=editstaff&user_id=".I('user_id')."&staff=".I('staff'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         $output = curl_exec($ch);
-        $json=json_decode($output,true);
         curl_close($ch);
+        $json=json_decode($output,true);
         if ($json['code'] == 0){
             $db_user->where($where_user)->data($data_user)->save();
             $this->success('客户的邀请人修改成功', 'Admin/Index/users');
@@ -515,6 +515,39 @@ class IndexController extends AdminController {
             $this->error($json['msg']);
         }
     }
+
+    function curl_post($url, $post=array(), $isjson = 0)
+    {
+        if (is_string($post) && $isjson == 0) {
+            parse_str($post, $post);
+        }
+        if (!is_array($post) && $isjson == 0) {
+            return "";
+        }
+        if (is_array($post) && $isjson != 0) {
+            $post = json_encode($post);
+        }
+        $subjest='/https/is';
+        $https=preg_match($subjest,$url,$row);
+
+        $options = array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HEADER => false,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $post
+        );
+
+        if($https){//如果是https 则修改下面的配置
+            $options[CURLOPT_SSL_VERIFYPEER]=false;
+            $options[CURLOPT_SSL_VERIFYHOST]=false;
+        }
+        $ch = curl_init($url);
+        curl_setopt_array($ch, $options);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+    }
+
 
     /**
      * 某一时段内，投资汇总

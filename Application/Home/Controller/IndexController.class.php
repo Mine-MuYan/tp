@@ -68,10 +68,15 @@ class IndexController extends HomeController {
         vendor('DES3.DES3');
         $DES3 = new \DES3();
         $zs=$redis->LLEN('channelAaaReginfo');
+
+
         for($i=0;$i< $zs;$i++){
             $list_jm=$redis->rpop("channelAaaReginfo");
             $one=$DES3->decrypt($list_jm);
             $one=json_decode($one,true);
+            if(empty($one['staff'])){
+                $one['staff']='';
+            }
             $data_user['user_id']=$one['user_id'];
             $data_user['username']=$one['username'];
             $data_user['realname']=$one['realname'];
@@ -81,17 +86,19 @@ class IndexController extends HomeController {
             $data_user['card_id']=$one['card_id'];
             $data_user['accout']=$one['accout'];
             $res=$db_user->add( $data_user);
+
+
         }
         echo 'success';
     }
 
     //满标复审
     public function saveinvest(){
+        echo 'success'; exit;
         $db_invest=M('invest');
         //获取数据
         $redis = new \Redis();
         $redis->connect('r-bp1d5a1a427a0ce4.redis.rds.aliyuncs.com',6379);
-        $redis->auth('Pl2lEnsU62fXmNqHYNpb');
         vendor('DES3.DES3');
         $DES3 = new \DES3();
         $zs=$redis->LLEN('channelAaaReverify');
@@ -109,7 +116,7 @@ class IndexController extends HomeController {
     //余额数据对整
     public function saveye(){
         $db_invest=M('user');
-        $html = file_get_contents('http://www.ronghedai.com/?user&q=channel_set&channel=clkj&action=sendInfoAll&function=getUserAccout');
+        $html = file_get_contents('http://zhaoweijian.ronghedai.com/?user&q=channel_set&channel=clkj&action=sendInfoAll&function=getUserAccout');
         vendor('DES3.DES3');
         $DES3 = new \DES3();
         $one=$DES3->decrypt($html);
